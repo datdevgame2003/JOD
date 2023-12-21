@@ -23,23 +23,23 @@ bool SplashScene::init() {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto background = Sprite::create("HelloWorld.png");
-	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	background->setScale(1.0f);
+	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
+	background->setScale(1.5f);
 	this->addChild(background);
 
-	auto label = Label::createWithTTF("Journey Of Discovery", "fonts/victoria.ttf", 40);
-	label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	auto label = Label::createWithTTF("Journey Of Discovery", "fonts/victoria.ttf", 50);
+	label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
 	label->enableOutline(Color4B::GREEN, 1);
-	label->enableGlow(Color4B::YELLOW);
+	label->enableGlow(Color4B::GREEN);
 	this->addChild(label);
 
 
-	auto moveBy = MoveBy::create(1.5, Vec2(0, -200));
+	auto moveBy = MoveBy::create(1, Vec2(0, -250));
 	auto callFunc = CallFunc::create([&]() {
 		auto startScene = StartGame::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(2, startScene));
 		});
 	auto sequence = Sequence::create(moveBy, callFunc, nullptr);
 	label->runAction(sequence);
-
+	return true;
 }

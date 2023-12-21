@@ -2,7 +2,7 @@
 //#include "GameScene.h"
 //#include "SettingScene.h"
 #include "ui/CocosGUI.h"
-//#include "TutorialScene.h"
+#include "TutorialScene.h"
 USING_NS_CC;
 
 Scene* MenuScene::createScene()
@@ -53,7 +53,7 @@ bool MenuScene::init() {
                 break;
             }
         });
-    button->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    button->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
     button->setScale(0.5);
     this->addChild(button);
 
@@ -78,7 +78,7 @@ bool MenuScene::init() {
                 break;
             }
         });
-    button1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 90));
+    button1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2.0));
     button1->setScale(0.5);
     this->addChild(button1);
 
@@ -95,7 +95,7 @@ bool MenuScene::init() {
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("Button 1 clicked!");
-                //Director::getInstance()->replaceScene(TransitionFade::create(2, Tutorial::createScene()));
+                Director::getInstance()->replaceScene(TransitionFade::create(2, Tutorial::createScene()));
                 break;
             case ui::Widget::TouchEventType::CANCELED:
                 break;
@@ -103,7 +103,7 @@ bool MenuScene::init() {
                 break;
             }
         });
-    button2->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 180));
+    button2->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2.9));
     button2->setScale(0.5);
     this->addChild(button2);
 
@@ -128,7 +128,7 @@ bool MenuScene::init() {
                 break;
             }
         });
-    button3->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 270));
+    button3->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 5.3));
     button3->setScale(0.5);
     this->addChild(button3);
 
