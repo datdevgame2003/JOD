@@ -24,7 +24,7 @@ bool StartGame::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto background = Sprite::create("background.png");
+    auto background = Sprite::create("br.png");
     background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(background, -1);
 
@@ -34,7 +34,7 @@ bool StartGame::init()
     this->addChild(nameGame);
 
     auto button = ui::Button::create("BtnBlue.png");
-    button->setTitleText("StartGame");
+    button->setTitleText("Start");
     button->setTitleFontName("fonts/victoria.ttf");
     button->setTitleFontSize(140);
     button->setTitleColor(Color3B::ORANGE);
