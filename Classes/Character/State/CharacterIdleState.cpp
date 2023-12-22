@@ -1,5 +1,5 @@
 #include "CharacterIdleState.h"
-#include "KeyBoardInput.h"
+#include "KeyboardInput.h"
 #include "StateMachine/StateMachine.h"
 
 void CharacterIdleState::enterState(Entity* owner)
