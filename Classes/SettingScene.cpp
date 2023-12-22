@@ -45,7 +45,7 @@ bool Setting::init()
                 break;
             }
         });
-    button->setPosition(Vec2(visibleSize.width / 2 - 550, visibleSize.height / 2 + 350));
+    button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 1.0));
     button->setScale(0.5);
     this->addChild(button);
     auto background = Sprite::create("setting_bg.png");
@@ -70,9 +70,9 @@ bool Setting::init()
     slider->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 50));
     this->addChild(slider);
     //AudioEngine::play2d("BGM.mp3", true, 2.0f);
-    slider->addEventListener([=](Ref* sender, ui::Slider::EventType tyle) {
+    slider->addEventListener([=](Ref* sender, ui::Slider::EventType type) {
         auto slider = dynamic_cast<ui::Slider*>(sender);
-    if (tyle == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
+    if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
     {
         CCLOG("%d", slider->getPercent());
     }
@@ -88,14 +88,14 @@ bool Setting::init()
     slider1->loadProgressBarTexture("ldb.png");
     slider1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 50));
     slider1->addEventListener([=](Ref* sender, ui::Slider::EventType type) {
-    this->addChild(slider1);
+    
     if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
     {
         auto slidermusic = dynamic_cast<ui::Slider*>(sender);
-        log("music percent: %d", slider->getPercent());
+        log("music percent: %d", slider1->getPercent());
     }
         });
-   
+    this->addChild(slider1);
     return true;
 }
 

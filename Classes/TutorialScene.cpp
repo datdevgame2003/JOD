@@ -51,13 +51,13 @@ bool Tutorial::init()
 				break;
 			}
 		});
-	button->setPosition(Vec2(visibleSize.width / 2 - 550, visibleSize.height / 2 + 350));
+	button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 1.0));
 	button->setScale(0.5);
 	this->addChild(button);
 	ui::RichText* richtext = ui::RichText::create();
 	richtext->ignoreContentAdaptWithSize(false);
 	richtext->setContentSize(Size(1000, 800));
-	richtext->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + 200 - origin.y));
+	richtext->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + 250 - origin.y));
 
 	ui::RichElementText* hello = ui::RichElementText::create(1, Color3B::BLACK, 255, "Welcome to Journey of Discovery!", "victoria.ttf", 30);
 	ui::RichElementText* hello1 = ui::RichElementText::create(1, Color3B::BLACK, 255, "\nYou will participate in an exciting journey in a maze full of mysteries and challenges. Get ready to explore and tackle monsters to reach the final goal.", "victoria.ttf", 24);
@@ -70,7 +70,7 @@ bool Tutorial::init()
 	ui::RichText* richtext1 = ui::RichText::create();
 	richtext1->ignoreContentAdaptWithSize(false);
 	richtext1->setContentSize(Size(1000, 800));
-	richtext1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	richtext1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2.9 + origin.y));
 
 
 	ui::RichElementText* moveC1 = ui::RichElementText::create(1, Color3B::BLACK, 255, "- Use navigation keys", "victoria.ttf", 24);

@@ -1,6 +1,6 @@
 #include "Menu.h"
 //#include "GameScene.h"
-//#include "SettingScene.h"
+#include "SettingScene.h"
 #include "ui/CocosGUI.h"
 #include "TutorialScene.h"
 USING_NS_CC;
@@ -70,7 +70,7 @@ bool MenuScene::init() {
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("Button 1 clicked!");
-                //Director::getInstance()->replaceScene(TransitionFade::create(2, Setting::createScene()));
+                Director::getInstance()->replaceScene(TransitionFade::create(2, Setting::createScene()));
                 break;
             case ui::Widget::TouchEventType::CANCELED:
                 break;
