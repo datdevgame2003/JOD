@@ -1,7 +1,11 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "SplashScene.h"
-
+#include "Utilities/AnimationUtils.h"
+#include "GameScene.h"
+#include "Menu.h"
+#include "TutorialScene.h"
+#include "SettingScene.h"
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
 using namespace cocos2d::experimental;

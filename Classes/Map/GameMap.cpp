@@ -22,7 +22,7 @@ bool GameMap::initWithTMXFile(const std::string& tmxFile)
 		return false;
 	}
 
-	_metaLayer = this->getLayer("Meta");
+	_metaLayer = this->getLayer("meta");
 	if (_metaLayer)
 		_metaLayer->setVisible(false);
 	return true;

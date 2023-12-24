@@ -4,44 +4,44 @@
   <dict>
     <key>frames</key>
     <dict>
-      <key>Boy-idle (1)</key>
+      <key>Boy-idle (3)</key>
       <dict>
         <key>frame</key>
-        <string>{{0,0},{49,71}}</string>
+        <string>{{0,0},{36,50}}</string>
         <key>offset</key>
-        <string>{0.5,-28.5}</string>
+        <string>{-1,-20}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{40,57},{49,71}}</string>
+        <string>{{26,40},{36,50}}</string>
         <key>sourceSize</key>
-        <string>{128,128}</string>
+        <string>{90,90}</string>
+      </dict>
+      <key>Boy-idle (1)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{0,50},{35,50}}</string>
+        <key>offset</key>
+        <string>{0.5,-20}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{28,40},{35,50}}</string>
+        <key>sourceSize</key>
+        <string>{90,90}</string>
       </dict>
       <key>Boy-idle (2)</key>
       <dict>
         <key>frame</key>
-        <string>{{0,71},{49,71}}</string>
+        <string>{{0,100},{35,50}}</string>
         <key>offset</key>
-        <string>{-0.5,-28.5}</string>
+        <string>{-0.5,-20}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{39,57},{49,71}}</string>
+        <string>{{27,40},{35,50}}</string>
         <key>sourceSize</key>
-        <string>{128,128}</string>
-      </dict>
-      <key>Boy-idle (3)</key>
-      <dict>
-        <key>frame</key>
-        <string>{{0,142},{49,71}}</string>
-        <key>offset</key>
-        <string>{-1.5,-28.5}</string>
-        <key>rotated</key>
-        <false/>
-        <key>sourceColorRect</key>
-        <string>{{38,57},{49,71}}</string>
-        <key>sourceSize</key>
-        <string>{128,128}</string>
+        <string>{90,90}</string>
       </dict>
     </dict>
     <key>metadata</key>

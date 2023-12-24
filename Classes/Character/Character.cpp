@@ -30,8 +30,8 @@ bool Character::init(EntityInfo* info)
 
 	_stateMachine = StateMachine::create(this);
 	_stateMachine->addState("idle", new CharacterIdleState());
-	_stateMachine->addState("move", new CharacterRunState());
-	_stateMachine->addState("run", new CharacterAttackState());
+	_stateMachine->addState("run", new CharacterRunState());
+	_stateMachine->addState("attack", new CharacterAttackState());
 	_stateMachine->setCurrentState("idle");
 
 
