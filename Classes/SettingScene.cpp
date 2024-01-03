@@ -1,6 +1,7 @@
 #include "SettingScene.h"
 #include "Menu.h"
 #include "ui/CocosGUI.h"
+#include "AudioEngine.h"
 USING_NS_CC;
 
 Scene* Setting::createScene()
@@ -24,78 +25,81 @@ bool Setting::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto button = ui::Button::create("14.png");
-    button->setTitleText("Back");
-    button->setTitleFontName("fonts/victoria.ttf");
-    button->setTitleFontSize(100);
-    button->setTitleColor(Color3B::BLACK);
-    button->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
-        {
+    auto buttonQuit = ui::Button::create("home.png");
+    buttonQuit->addTouchEventListener(
+        [&](Ref* sender, ui::Widget::TouchEventType type) {
             switch (type)
             {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                CCLOG("Button 1 clicked!");
-                Director::getInstance()->replaceScene(TransitionFade::create(2, MenuScene::createScene()));
+                Director::getInstance()->replaceScene(MenuScene::createScene());
                 break;
             case ui::Widget::TouchEventType::CANCELED:
                 break;
             default:
                 break;
-            }
-        });
-    button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 1.0));
-    button->setScale(0.5);
-    this->addChild(button);
+            }});
+    buttonQuit->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 0.9));
+    buttonQuit->setScale(2);
+    this->addChild(buttonQuit);
+
     auto background = Sprite::create("setting_bg.png");
     background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     background->setScale(3);
     this->addChild(background, -1);
 
-    auto setting = Label::createWithSystemFont("Settings", "victoria.ttf", 50);
+    auto setting = Label::createWithSystemFont("SETTINGS", "fonts/victoria.ttf", 65);
     setting->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 300));
     this->addChild(setting);
-    auto bgMusic = Label::createWithSystemFont("Music", "victoria.ttf", 36);
-    bgMusic->setPosition(Vec2(visibleSize.width / 2 - 250, visibleSize.height / 2 + 50));
+    auto bgMusic = Label::createWithSystemFont("MUSIC", "fonts/victoria.ttf", 36);
+    bgMusic->setPosition(Vec2(visibleSize.width / 2 - 400, visibleSize.height / 2 + 50));
     this->addChild(bgMusic);
 
-
-
-
+    //music
+    int id1 = AudioEngine::play2d("Audio/BGM.mp3", true, 1.0f);
     auto slider = ui::Slider::create();
     slider->loadBarTexture("loadingBar.png");
     slider->loadSlidBallTextures("kt.png");
     slider->loadProgressBarTexture("ldb.png");
+    slider->setPercent(100);
     slider->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 50));
     this->addChild(slider);
-    //AudioEngine::play2d("BGM.mp3", true, 2.0f);
     slider->addEventListener([=](Ref* sender, ui::Slider::EventType type) {
-        auto slider = dynamic_cast<ui::Slider*>(sender);
-    if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
-    {
-        CCLOG("%d", slider->getPercent());
-    }
+
+        if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
+        {
+            auto slider = dynamic_cast<ui::Slider*>(sender);
+            log("music percent: %d", id1);
+            AudioEngine::setVolume(id1, (float)slider->getPercent() / 100);
+        }
         });
-    slider->setPercent(50);
+
+
+
     auto sfx = Label::createWithSystemFont("SFX", "Arial", 36);
-    sfx->setPosition(Vec2(visibleSize.width / 2 - 250, visibleSize.height / 2 - 50));
+    sfx->setPosition(Vec2(visibleSize.width / 2 - 400, visibleSize.height / 2 - 100));
     this->addChild(sfx);
 
+    //sfx
+    int id = AudioEngine::play2d("Audio/attack.mp3", true, 1.0f);
     auto slider1 = ui::Slider::create();
     slider1->loadBarTexture("loadingBar.png");
     slider1->loadSlidBallTextures("kt.png");
     slider1->loadProgressBarTexture("ldb.png");
-    slider1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 50));
+    slider1->setPercent(100);
+    slider1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 100));
+    this->addChild(slider1);
     slider1->addEventListener([=](Ref* sender, ui::Slider::EventType type) {
-    
-    if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
-    {
-        auto slidermusic = dynamic_cast<ui::Slider*>(sender);
-        log("music percent: %d", slider1->getPercent());
+
+        if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
+        {
+            auto slidermusic = dynamic_cast<ui::Slider*>(sender);
+            log("sfx percent: %d", id);
+            AudioEngine::setVolume(id, (float)slidermusic->getPercent() / 100);
     }
         });
-    this->addChild(slider1);
+    
     return true;
 }
 

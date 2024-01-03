@@ -29,7 +29,7 @@ bool StartGame::init()
     this->addChild(background, -1);
 
     auto nameGame = Label::createWithTTF("Journey Of Discovery", "fonts/victoria.ttf", 150);
-    nameGame->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 250));
+    nameGame->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 490));
     nameGame->enableGlow(Color4B::GREEN);
     this->addChild(nameGame);
 
@@ -54,7 +54,7 @@ bool StartGame::init()
                 break;
             }
         });
-    button->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 150));
+    button->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 300));
     button->setScale(0.3);
     this->addChild(button);
 

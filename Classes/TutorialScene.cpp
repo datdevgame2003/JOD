@@ -51,7 +51,7 @@ bool Tutorial::init()
 				break;
 			}
 		});
-	button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 1.0));
+	button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 0.9));
 	button->setScale(0.5);
 	this->addChild(button);
 	ui::RichText* richtext = ui::RichText::create();
@@ -70,7 +70,7 @@ bool Tutorial::init()
 	ui::RichText* richtext1 = ui::RichText::create();
 	richtext1->ignoreContentAdaptWithSize(false);
 	richtext1->setContentSize(Size(1000, 800));
-	richtext1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2.9 + origin.y));
+	richtext1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2.5 + origin.y));
 
 
 	ui::RichElementText* moveC1 = ui::RichElementText::create(1, Color3B::BLACK, 255, "- Use navigation keys", "victoria.ttf", 24);

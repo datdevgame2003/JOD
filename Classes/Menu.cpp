@@ -24,7 +24,7 @@ bool MenuScene::init() {
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto nameGame = Label::createWithTTF("Journey Of Discovery", "fonts/victoria.ttf", 150);
-    nameGame->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 250));
+    nameGame->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 350));
     nameGame->enableGlow(Color4B::GREEN);
     this->addChild(nameGame);
 

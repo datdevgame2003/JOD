@@ -1,4 +1,8 @@
 {
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
     "activeFile": "Map/map1.tmx",
     "expandedProjectPaths": [
     ],
@@ -10,8 +14,8 @@
             "scale": 0.6340697674418605,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 641.0966440491472,
-                "y": 431.34054648817164
+                "x": 639.5195305336513,
+                "y": 426.6092059416835
             }
         },
         "Map/map1.tsx": {

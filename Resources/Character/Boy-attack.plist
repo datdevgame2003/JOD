@@ -7,80 +7,80 @@
       <key>Boy-attack (5)</key>
       <dict>
         <key>frame</key>
-        <string>{{0,0},{60,52}}</string>
+        <string>{{0,0},{41,35}}</string>
         <key>offset</key>
-        <string>{11,-19}</string>
+        <string>{7.5,-12.5}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{26,38},{60,52}}</string>
+        <string>{{17,25},{41,35}}</string>
         <key>sourceSize</key>
-        <string>{90,90}</string>
-      </dict>
-      <key>Boy-attack (2)</key>
-      <dict>
-        <key>frame</key>
-        <string>{{60,0},{31,53}}</string>
-        <key>offset</key>
-        <string>{-10.5,-18.5}</string>
-        <key>rotated</key>
-        <true/>
-        <key>sourceColorRect</key>
-        <string>{{19,37},{31,53}}</string>
-        <key>sourceSize</key>
-        <string>{90,90}</string>
-      </dict>
-      <key>Boy-attack (4)</key>
-      <dict>
-        <key>frame</key>
-        <string>{{113,0},{31,53}}</string>
-        <key>offset</key>
-        <string>{-5.5,-18.5}</string>
-        <key>rotated</key>
-        <true/>
-        <key>sourceColorRect</key>
-        <string>{{24,37},{31,53}}</string>
-        <key>sourceSize</key>
-        <string>{90,90}</string>
-      </dict>
-      <key>Boy-attack (6)</key>
-      <dict>
-        <key>frame</key>
-        <string>{{166,0},{31,53}}</string>
-        <key>offset</key>
-        <string>{-10.5,-18.5}</string>
-        <key>rotated</key>
-        <true/>
-        <key>sourceColorRect</key>
-        <string>{{19,37},{31,53}}</string>
-        <key>sourceSize</key>
-        <string>{90,90}</string>
-      </dict>
-      <key>Boy-attack (3)</key>
-      <dict>
-        <key>frame</key>
-        <string>{{219,0},{31,52}}</string>
-        <key>offset</key>
-        <string>{-3.5,-19}</string>
-        <key>rotated</key>
-        <true/>
-        <key>sourceColorRect</key>
-        <string>{{26,38},{31,52}}</string>
-        <key>sourceSize</key>
-        <string>{90,90}</string>
+        <string>{60,60}</string>
       </dict>
       <key>Boy-attack (1)</key>
       <dict>
         <key>frame</key>
-        <string>{{271,0},{24,42}}</string>
+        <string>{{41,0},{22,36}}</string>
         <key>offset</key>
-        <string>{-8,-14}</string>
+        <string>{-7,-12}</string>
         <key>rotated</key>
         <true/>
         <key>sourceColorRect</key>
-        <string>{{15,28},{24,42}}</string>
+        <string>{{12,24},{22,36}}</string>
         <key>sourceSize</key>
-        <string>{70,70}</string>
+        <string>{60,60}</string>
+      </dict>
+      <key>Boy-attack (2)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{77,0},{22,36}}</string>
+        <key>offset</key>
+        <string>{-7,-12}</string>
+        <key>rotated</key>
+        <true/>
+        <key>sourceColorRect</key>
+        <string>{{12,24},{22,36}}</string>
+        <key>sourceSize</key>
+        <string>{60,60}</string>
+      </dict>
+      <key>Boy-attack (6)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{113,0},{22,36}}</string>
+        <key>offset</key>
+        <string>{-7,-12}</string>
+        <key>rotated</key>
+        <true/>
+        <key>sourceColorRect</key>
+        <string>{{12,24},{22,36}}</string>
+        <key>sourceSize</key>
+        <string>{60,60}</string>
+      </dict>
+      <key>Boy-attack (4)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{149,0},{21,36}}</string>
+        <key>offset</key>
+        <string>{-3.5,-12}</string>
+        <key>rotated</key>
+        <true/>
+        <key>sourceColorRect</key>
+        <string>{{16,24},{21,36}}</string>
+        <key>sourceSize</key>
+        <string>{60,60}</string>
+      </dict>
+      <key>Boy-attack (3)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{185,0},{21,35}}</string>
+        <key>offset</key>
+        <string>{-2.5,-12.5}</string>
+        <key>rotated</key>
+        <true/>
+        <key>sourceColorRect</key>
+        <string>{{17,25},{21,35}}</string>
+        <key>sourceSize</key>
+        <string>{60,60}</string>
       </dict>
     </dict>
     <key>metadata</key>

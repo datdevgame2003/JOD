@@ -6,26 +6,42 @@
 #include "Character/Character.h"
 #include "Camera/CameraFollow.h"
 #include "audio/include/AudioEngine.h"
-
+#include "Layer/SettingLayer.h"
 USING_NS_CC;
-Scene* GameScene::createScene()
+
+Scene* GameScene::create(std::string mapName)
 {
-	return GameScene::create();
+	auto newObject = new GameScene();
+	if (newObject != nullptr && newObject->init(mapName))
+	{
+		newObject->autorelease();
+		return newObject;
+	}
+
+	CC_SAFE_DELETE(newObject);
+	return nullptr;
 }
 
-static void problemLoading(const char* filename) {
-	printf("Error while loading: %s\n", filename);
-	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in GameScene.cpp\n");
-}
-
-bool GameScene::init() {
-	if (!Scene::init())
+bool GameScene::init(std::string mapName) {
+	if (!Scene::initWithPhysics())
 	{
 		return false;
 	}
+	auto winSize = Director::getInstance()->getWinSize();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	//AudioEngine::play2d("Audio/BGM.mp3", false, 1.0f);
+
+	elapsedTime = 0.0f;
+	Ended = false;
+
+	
+	timeLabel = Label::createWithTTF("Time: ", "fonts/Marker Felt.ttf", 30);
+	timeLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
+	timeLabel->enableGlow(Color4B::RED);
+	timeLabel->enableOutline(Color4B::RED, 1);
+	this->addChild(timeLabel, 100);
+
+
 	layer = Layer::create();
 
 	EntityStat* characterStat = new EntityStat();
@@ -34,16 +50,12 @@ bool GameScene::init() {
 	character = Character::create(new EntityInfo(1, "Boy"));
 	character->setEntityStat(characterStat);
 
-	auto background = Sprite::create("bg1.png");
-	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	background->setScale(2.5f);
-	this->addChild(background);
 
-	_gameMap = GameMap::create("/Map/map1.tmx");
+	_gameMap = GameMap::create("Map/map1.tmx");
 	_gameMap->setTag(99);
-
 	TMXObjectGroup* objGroup = _gameMap->getObjectGroup("SpawnPoint");
-	ValueMap charPoint = objGroup->getObject("Hero");
+	ValueMap charPoint = objGroup->getObject("Nv");
+
 
 	Vec2 position;
 	position.x = charPoint["x"].asFloat();
@@ -54,42 +66,60 @@ bool GameScene::init() {
 	this->addChild(_gameMap);
 	this->addChild(layer, 100);
 	this->addChild(character, 1);
-
 	this->scheduleUpdate();
 
-	auto button = ui::Button::create("14.png");
-	button->setTitleText("Back");
-	button->setTitleFontName("fonts/victoria.ttf");
-	button->setTitleFontSize(100);
-	button->setTitleColor(Color3B::BLACK);
-	button->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
-		{
+	
+	auto buttonSetting = ui::Button::create("setting.png");
+	buttonSetting->addTouchEventListener(
+		[=](Ref* sender, ui::Widget::TouchEventType type) {
 			switch (type)
 			{
 			case ui::Widget::TouchEventType::BEGAN:
 				break;
-			case ui::Widget::TouchEventType::ENDED:
-				CCLOG("Button 1 clicked!");
-				Director::getInstance()->replaceScene(TransitionFade::create(2, MenuScene::createScene()));
-				break;
+			case ui::Widget::TouchEventType::ENDED: {
+				Director::getInstance()->pause();
+				auto layer1 = SettingLayer::create();
+				this->addChild(layer1, 101);
+				break; }
 			case ui::Widget::TouchEventType::CANCELED:
 				break;
 			default:
 				break;
-			}
-		});
-	button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 0.9));
-	button->setScale(0.5);
-	layer->addChild(button);
+			}});
+	buttonSetting->setPosition(Vec2(visibleSize.width / 20, visibleSize.height * 0.9));
+	buttonSetting->setScale(visibleSize.height / buttonSetting->getContentSize().height * 0.1);
+	layer->addChild(buttonSetting, 99);
 
 	this->scheduleUpdate();
+	this->schedule([=](float dt) {
+		updateTime(dt);
+		}, 1.0f, "updateTime");
+
+	
 	return true;
 }
 void GameScene::update(float dt)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
+	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
 }
+
+void GameScene::updateTime(float dt)
+{ 
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	//auto button = ui::Button::create("Time.png");
+	/*button->setPosition(Vec2(visibleSize.width / 2.5, visibleSize.height / 1.5));
+	this->addChild(button);*/
+	
+	
+	elapsedTime += 1.0f;
+	int remainingTime = static_cast<int>(120.0f - elapsedTime);
+	remainingTime = std::max(remainingTime, 0);
+	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
+	
+}
+
 void GameScene::onEnter()
 {
 	Scene::onEnter();
@@ -103,3 +133,4 @@ void GameScene::onEnter()
 
 	this->addChild(KeyboardInput::getInstance());
 }
+
