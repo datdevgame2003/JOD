@@ -7,6 +7,23 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "C:/Users/Admin/GD1301/Cocos2dxProject/FirstProj/Resources/Map/TX Tileset Grass.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/source/repos/FJ/Resources/Maps/TX Tileset Stone Ground.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/source/repos/FJ/Resources/Maps/map2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 677,
+                "y": 379
+            }
+        },
+        "C:/Users/Admin/source/repos/FJ/Resources/Maps/meta.tsx": {
+            "scaleInDock": 1
+        },
         "Map/gate.tsx": {
             "scaleInDock": 1
         },
@@ -24,6 +41,22 @@
         "Map/map1wall.tsx": {
             "scaleInDock": 1
         },
+        "Map/map2.tmx": {
+            "scale": 0.5801063829787234,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 740.381441408399,
+                "y": 471.4652484870714
+            }
+        },
+        "Map/map3.tmx": {
+            "scale": 0.4288013698630137,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1461.0494369459307,
+                "y": 472.2466256688763
+            }
+        },
         "Map/meta.tsx": {
             "scaleInDock": 1
         }
@@ -33,6 +66,7 @@
     ],
     "project": "untitled.tiled-project2.tiled-project",
     "recentFiles": [
+        "C:/Users/Admin/source/repos/FJ/Resources/Maps/map2.tmx",
         "Map/map1.tmx"
     ]
 }

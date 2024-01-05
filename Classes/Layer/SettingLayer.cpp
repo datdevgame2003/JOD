@@ -53,7 +53,8 @@ bool SettingLayer::init() {
 				break;
 			case ui::Widget::TouchEventType::ENDED:
 				Director::getInstance()->resume();
-				Director::getInstance()->replaceScene(GameScene::create());
+				Director::getInstance()->replaceScene(GameScene::create(""));
+				
 				break;
 			case ui::Widget::TouchEventType::CANCELED:
 				break;

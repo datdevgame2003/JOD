@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "TutorialScene.h"
 #include "SettingScene.h"
+#include "Level.h"
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
 using namespace cocos2d::experimental;
@@ -84,7 +85,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-    auto scene = SplashScene::createScene();
+    auto scene = SplashScene::create();
 
     // run
     director->runWithScene(scene);

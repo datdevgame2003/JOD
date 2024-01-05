@@ -51,7 +51,7 @@ bool GameScene::init(std::string mapName) {
 	character->setEntityStat(characterStat);
 
 
-	_gameMap = GameMap::create("Map/map1.tmx");
+	_gameMap = GameMap::create(mapName);
 	_gameMap->setTag(99);
 	TMXObjectGroup* objGroup = _gameMap->getObjectGroup("SpawnPoint");
 	ValueMap charPoint = objGroup->getObject("Nv");
@@ -100,6 +100,7 @@ bool GameScene::init(std::string mapName) {
 }
 void GameScene::update(float dt)
 {
+	
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
 	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
@@ -108,13 +109,9 @@ void GameScene::update(float dt)
 void GameScene::updateTime(float dt)
 { 
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	//auto button = ui::Button::create("Time.png");
-	/*button->setPosition(Vec2(visibleSize.width / 2.5, visibleSize.height / 1.5));
-	this->addChild(button);*/
-	
 	
 	elapsedTime += 1.0f;
-	int remainingTime = static_cast<int>(120.0f - elapsedTime);
+	int remainingTime = static_cast<int>(90.0f - elapsedTime);
 	remainingTime = std::max(remainingTime, 0);
 	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
 	
