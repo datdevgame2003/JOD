@@ -3,6 +3,7 @@
 #include "State/CharacterIdleState.h"
 #include "State/CharacterAttackState.h"
 #include "State/CharacterRunState.h"
+#include "DefineBitmask.h"
 
 Character* Character::create(EntityInfo* info)
 {
@@ -34,6 +35,11 @@ bool Character::init(EntityInfo* info)
 	_stateMachine->addState("attack", new CharacterAttackState());
 	_stateMachine->setCurrentState("idle");
 
+	auto body = PhysicsBody::createEdgeBox(_model->getContentSize(), PhysicsMaterial(1, 0, 1), 1.0f);
+	body->setCategoryBitmask(DefineBitmask::Character);
+	body->setCollisionBitmask(DefineBitmask::Enemy);
+	body->setContactTestBitmask(DefineBitmask::Enemy);
+	this->setPhysicsBody(body);
 
 	this->addChild(_stateMachine);
 	return true;
@@ -55,4 +61,15 @@ bool Character::loadAnimations()
 	}
 
 	return true;
+}
+void Character::onEnter()
+{
+	Node::onEnter();
+
+	// health
+	_healthCtrl = Health::create(_entityStat->_health, "_hp.png");
+	//_healthCtrl->setOnDie(CC_CALLBACK_0(Enemy::onDie, this));
+	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 1.4
+		, _model->getContentSize().height));
+	this->addChild(_healthCtrl);
 }

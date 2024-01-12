@@ -5,7 +5,7 @@
 #include "Character/Character.h"
 #include "Map/GameMap.h"
 #include "ui/CocosGUI.h"
-
+//#include"Layer/SettingLayer.h"
 USING_NS_CC;
 
 class GameScene : public cocos2d::Scene
@@ -24,7 +24,6 @@ protected:
     bool Ended;
     Label* timeLabel;
 protected:
-    //void resetGame();
     void update(float dt) override;
     void onEnter() override;
     //bool checkWinCondition();

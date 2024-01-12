@@ -1,13 +1,12 @@
-#include "SettingLayer.h"
+﻿#include "SettingLayer.h"
 #include "GameScene.h"
 #include "Menu.h"
 #include "ui/CocosGUI.h"
+#include "Camera/CameraFollow.h"
+#include "Map/GameMap.h"
 USING_NS_CC;
-//
-//Scene* SettingLayer::createScene()
-//{
-//	return SettingLayer::create();
-//}
+
+
 
 bool SettingLayer::init() {
 	if (!Layer::init())
@@ -16,11 +15,12 @@ bool SettingLayer::init() {
 	}
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	auto background = Sprite::create("optionbox.png");
+	
+    background = Sprite::create("ob.png");
+	
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	background->setScale(visibleSize.height / background->getContentSize().height * 0.8);
-	//background->setScale(4);
+	background->setScale(visibleSize.height / background->getContentSize().height * 0.75);
+	//background->setScale(1);
 	this->addChild(background);
 
 	auto buttonresume = ui::Button::create("resume.png");
@@ -41,31 +41,39 @@ bool SettingLayer::init() {
 			}});
 	buttonresume->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.65));
 	buttonresume->setScale(visibleSize.height / buttonresume->getContentSize().height * 0.15);
-	this->addChild(buttonresume, 5);
+	this->addChild(buttonresume, 105);
 
-	
-	auto buttonRestart = ui::Button::create("restart.png");
-	buttonRestart->addTouchEventListener(
-		[&](Ref* sender, ui::Widget::TouchEventType type) {
-			switch (type)
-			{
-			case ui::Widget::TouchEventType::BEGAN:
-				break;
-			case ui::Widget::TouchEventType::ENDED:
-				Director::getInstance()->resume();
-				Director::getInstance()->replaceScene(GameScene::create(""));
-				
-				break;
-			case ui::Widget::TouchEventType::CANCELED:
-				break;
-			default:
-				break;
-			}});
-	buttonRestart->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.45));
-	buttonRestart->setScale(visibleSize.height / buttonRestart->getContentSize().height * 0.15);
-	this->addChild(buttonRestart, 5);
-	
+	std::vector<std::string> maps;
+	maps.push_back("map1");
+	maps.push_back("map2");
+	maps.push_back("map3");
 
+	for (int i = 0; i < maps.size(); ++i)
+	{
+		auto buttonRestart = ui::Button::create("restart.png");
+		buttonRestart->addTouchEventListener(
+			[&maps, i](Ref* sender, ui::Widget::TouchEventType type) {
+				switch (type)
+				{
+				case ui::Widget::TouchEventType::BEGAN:
+					break;
+				case ui::Widget::TouchEventType::ENDED:
+					Director::getInstance()->resume();
+
+					Director::getInstance()->replaceScene(GameScene::create(maps[i]));
+
+					break;
+				case ui::Widget::TouchEventType::CANCELED:
+					break;
+				default:
+					break;
+				}
+			});
+		buttonRestart->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.45));
+		buttonRestart->setScale(visibleSize.height / buttonRestart->getContentSize().height * 0.15);
+		this->addChild(buttonRestart, 5);
+
+	}
 	auto buttonQuit = ui::Button::create("home.png");
 	buttonQuit->addTouchEventListener(
 		[&](Ref* sender, ui::Widget::TouchEventType type) {
@@ -86,7 +94,16 @@ bool SettingLayer::init() {
 	buttonQuit->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.25));
 	buttonQuit->setScale(visibleSize.height / buttonQuit->getContentSize().height * 0.15);
 	this->addChild(buttonQuit, 5);
-
-	//Director::getInstance()->getActionManager()->pauseAllRunningActions();
+	//this->scheduleUpdate();
 	return true;
+}
+void SettingLayer::update(float dt)
+{
+	/*auto background = Director::getInstance()->getRunningScene();*/
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	/*auto runningScene = Director::getInstance()->getRunningScene();
+	if (runningScene) {*/
+		background->setPosition(getScene()->getDefaultCamera()->getPosition() + visibleSize / -2.5);
+		
+	
 }

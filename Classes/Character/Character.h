@@ -3,6 +3,7 @@
 
 #include "Entity/Entity.h"
 #include "StateMachine/StateMachine.h"
+#include "Health/Health.h"
 
 class Character : public Entity
 {
@@ -15,6 +16,13 @@ protected:
 	bool loadAnimations() override;
 protected:
 	StateMachine* _stateMachine;
+protected:
+
+	Health* _healthCtrl;
+
+	//void onDie();
+
+	void onEnter();
 };
 
 #endif // !__CHARACTER_H__

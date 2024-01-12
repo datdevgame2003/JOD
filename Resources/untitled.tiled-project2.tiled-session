@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map/map1.tmx",
+    "activeFile": "Map/map3.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -28,10 +28,13 @@
             "scaleInDock": 1
         },
         "Map/map1.tmx": {
+            "expandedObjectLayers": [
+                6
+            ],
             "scale": 0.6340697674418605,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 639.5195305336513,
+                "x": 805.1164496607372,
                 "y": 426.6092059416835
             }
         },
@@ -42,31 +45,69 @@
             "scaleInDock": 1
         },
         "Map/map2.tmx": {
+            "expandedObjectLayers": [
+                6
+            ],
             "scale": 0.5801063829787234,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 740.381441408399,
+                "x": 738.6576196589035,
                 "y": 471.4652484870714
             }
         },
+        "Map/map2.tsx": {
+            "scaleInDock": 1
+        },
+        "Map/map2wall.tsx": {
+            "scaleInDock": 1
+        },
         "Map/map3.tmx": {
+            "expandedObjectLayers": [
+                7
+            ],
             "scale": 0.4288013698630137,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 1461.0494369459307,
-                "y": 472.2466256688763
+                "x": 1458.7173548438625,
+                "y": 467.58246146473925
             }
+        },
+        "Map/map3.tsx": {
+            "scaleInDock": 1
+        },
+        "Map/map3wall.tsx": {
+            "scaleInDock": 1
+        },
+        "Map/map4.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 735,
+                "y": 521
+            }
+        },
+        "Map/map4.tsx": {
+            "scaleInDock": 1
+        },
+        "Map/map4wall.tsx": {
+            "scaleInDock": 1
         },
         "Map/meta.tsx": {
             "scaleInDock": 1
         }
     },
     "openFiles": [
-        "Map/map1.tmx"
+        "Map/map1.tmx",
+        "Map/map2.tmx",
+        "Map/map3.tmx",
+        "Map/map4.tmx"
     ],
     "project": "untitled.tiled-project2.tiled-project",
     "recentFiles": [
-        "C:/Users/Admin/source/repos/FJ/Resources/Maps/map2.tmx",
-        "Map/map1.tmx"
+        "Map/map1.tmx",
+        "Map/map2.tmx",
+        "Map/map4.tmx",
+        "Map/map3.tmx",
+        "C:/Users/Admin/source/repos/FJ/Resources/Maps/map2.tmx"
     ]
 }

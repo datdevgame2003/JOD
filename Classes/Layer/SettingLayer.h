@@ -6,8 +6,12 @@ USING_NS_CC;
 class SettingLayer : public cocos2d::Layer {
 public:
 	
-	virtual bool init() override;
+	virtual bool init();
 	CREATE_FUNC(SettingLayer);
+protected:
+	Sprite* background;
+protected:
+	void update(float dt);
 };
 
 #endif // __SETTING_LAYER_H__

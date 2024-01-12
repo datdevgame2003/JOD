@@ -65,7 +65,6 @@ void KeyboardInput::removeKey(EventKeyboard::KeyCode key)
 void KeyboardInput::onKeyPressed(EventKeyboard::KeyCode key, Event* ev)
 {
 	if (_keys.find(key) == _keys.end()) return;
-
 	_keys[key] = true;
 	switch (key)
 	{

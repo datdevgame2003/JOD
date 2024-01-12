@@ -1,12 +1,14 @@
 #include "GameScene.h"
 #include "ui/CocosGUI.h"
 #include "Menu.h"
+#include "Enemy/Enemy.h"
 #include "KeyboardInput.h"
 #include "Map/GameMap.h"
 #include "Character/Character.h"
 #include "Camera/CameraFollow.h"
 #include "audio/include/AudioEngine.h"
 #include "Layer/SettingLayer.h"
+#include "SettingScene.h"
 USING_NS_CC;
 
 Scene* GameScene::create(std::string mapName)
@@ -43,7 +45,6 @@ bool GameScene::init(std::string mapName) {
 
 
 	layer = Layer::create();
-
 	EntityStat* characterStat = new EntityStat();
 	characterStat->_runSpeed = 200.0f;
 
@@ -53,9 +54,42 @@ bool GameScene::init(std::string mapName) {
 
 	_gameMap = GameMap::create(mapName);
 	_gameMap->setTag(99);
+
+	//enemy
+	TMXObjectGroup* enemySpawnPoint = _gameMap->getObjectGroup("EnemySpawnPoint");
+	auto enemies = enemySpawnPoint->getObjects();
+	
+	for (auto enemyInfo : enemies)
+	{
+		ValueMap entityInfo = enemyInfo.asValueMap();
+		std::string name = entityInfo["name"].asString();
+		/*int lv = entityInfo["level"].asInt();
+		auto info = new EntityInfo(lv, name);*/
+	
+		auto enemy = Enemy::create(new EntityInfo(1, "slime"));
+
+
+		
+		Vec2 position;
+		position.x = entityInfo["x"].asFloat();
+		position.y = entityInfo["y"].asFloat();
+		enemy->setPosition(position);
+		 
+		EntityStat* enemyStat = new EntityStat();
+	    enemy->setEntityStat(enemyStat);
+		this->addChild(enemy, 3);
+	}
+
+	//auto enemy = Enemy::create(new EntityInfo(2, "slime"));
+
+	/*this->addChild(enemy, 1);*/
+
+	/*EntityStat* enemyStat = new EntityStat();
+    enemy->setEntityStat(enemyStat);*/
+
+	//Character
 	TMXObjectGroup* objGroup = _gameMap->getObjectGroup("SpawnPoint");
 	ValueMap charPoint = objGroup->getObject("Nv");
-
 
 	Vec2 position;
 	position.x = charPoint["x"].asFloat();
@@ -78,8 +112,8 @@ bool GameScene::init(std::string mapName) {
 				break;
 			case ui::Widget::TouchEventType::ENDED: {
 				Director::getInstance()->pause();
-				auto layer1 = SettingLayer::create();
-				this->addChild(layer1, 101);
+				auto layer = SettingLayer::create();
+				this->addChild(layer, 101);
 				break; }
 			case ui::Widget::TouchEventType::CANCELED:
 				break;

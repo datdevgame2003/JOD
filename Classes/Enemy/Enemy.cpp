@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Utilities/AnimationUtils.h"
 #include "DefineBitmask.h"
-
+#include "StateEnemy/EnemyIdleState.h"
 Enemy* Enemy::create(EntityInfo* info)
 {
 	auto newObject = new Enemy();
@@ -26,11 +26,15 @@ bool Enemy::init(EntityInfo* info)
 	_model = Sprite::createWithSpriteFrameName(_info->_entityName + "-idle (1)");
 	this->addChild(_model);
 
+	_stateMachine = StateMachine::create(this);
+	_stateMachine->addState("idle", new EnemyIdleState());
+	_stateMachine->setCurrentState("idle");
+
 	auto lvLabel = Label::createWithSystemFont("Lv. " + std::to_string(info->_level)
 		, "Arial", 16);
 	lvLabel->setAlignment(TextHAlignment::LEFT);
 
-	lvLabel->setPositionX(_model->getPosition().x + 50);
+	lvLabel->setPositionX(_model->getPosition().x + 10);
 
 	this->addChild(lvLabel);
 
@@ -62,8 +66,8 @@ bool Enemy::loadAnimations()
 
 	std::vector<std::string> aniNames;
 	aniNames.push_back(_info->_entityName + "-idle");
-	aniNames.push_back(_info->_entityName + "-run");
-	aniNames.push_back(_info->_entityName + "-attack");
+	/*aniNames.push_back(_info->_entityName + "-run");
+	aniNames.push_back(_info->_entityName + "-attack");*/
 
 	for (auto name : aniNames)
 	{
@@ -88,8 +92,8 @@ void Enemy::onEnter()
 	// health
 	_healthCtrl = Health::create(_entityStat->_health, "_hp.png");
 	_healthCtrl->setOnDie(CC_CALLBACK_0(Enemy::onDie, this));
-	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 2
-		, _model->getContentSize().height));
+	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 2.5
+		, _model->getContentSize().height / 2.2));
 	this->addChild(_healthCtrl);
 }
 

@@ -4,6 +4,7 @@
 #include "Entity/Entity.h"
 #include "IDamageable.h"
 #include "Health/Health.h"
+#include "StateMachine/StateMachine.h"
 
 class Enemy : public Entity, public IDamageable
 {
@@ -21,6 +22,8 @@ protected:
 
 	void onEnter();
 	bool callbackOnContactBegin(PhysicsContact& contact);
+protected:
+	StateMachine* _stateMachine;
 };
 
 #endif // !__ENEMY_H__

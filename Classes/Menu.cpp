@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "GameScene.h"
 #include "SettingScene.h"
+#include "Layer/SettingLayer.h"
 #include "ui/CocosGUI.h"
 #include "TutorialScene.h"
 #include "Level.h"
@@ -45,7 +46,7 @@ bool MenuScene::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                CCLOG("Button 1 clicked!");
+                CCLOG("Level clicked!");
                 Director::getInstance()->replaceScene(TransitionFade::create(2, Level::create()));
                 break;
             case ui::Widget::TouchEventType::CANCELED:
@@ -70,7 +71,7 @@ bool MenuScene::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                CCLOG("Button 1 clicked!");
+                CCLOG("setting clicked!");
                 Director::getInstance()->replaceScene(TransitionFade::create(2, Setting::createScene()));
                 break;
             case ui::Widget::TouchEventType::CANCELED:
@@ -95,7 +96,7 @@ bool MenuScene::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                CCLOG("Button 1 clicked!");
+                CCLOG("Tutorial clicked!");
                 Director::getInstance()->replaceScene(TransitionFade::create(2, Tutorial::createScene()));
                 break;
             case ui::Widget::TouchEventType::CANCELED:
@@ -120,7 +121,7 @@ bool MenuScene::init() {
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                CCLOG("Button 3 clicked!");
+                CCLOG("Exit clicked!");
                 Director::getInstance()->end();
                 break;
             case ui::Widget::TouchEventType::CANCELED:

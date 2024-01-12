@@ -97,9 +97,9 @@ bool Setting::init()
             auto slidermusic = dynamic_cast<ui::Slider*>(sender);
             log("sfx percent: %d", id);
             AudioEngine::setVolume(id, (float)slidermusic->getPercent() / 100);
-    }
+        }
         });
-    
+
     return true;
 }
 
