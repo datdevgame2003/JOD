@@ -23,7 +23,7 @@ bool Enemy::init(EntityInfo* info)
 		return false;
 	}
 
-	_model = Sprite::createWithSpriteFrameName(_info->_entityName + "-idle (1)");
+	_model = Sprite::createWithSpriteFrameName(_info->_entityName + "-idle (2)");
 	this->addChild(_model);
 
 	_stateMachine = StateMachine::create(this);
@@ -34,12 +34,12 @@ bool Enemy::init(EntityInfo* info)
 		, "Arial", 16);
 	lvLabel->setAlignment(TextHAlignment::LEFT);
 
-	lvLabel->setPositionX(_model->getPosition().x + 10);
+	lvLabel->setPositionX(_model->getPosition().x + 8);
 
 	this->addChild(lvLabel);
 
 
-	auto body = PhysicsBody::createEdgeBox(_model->getContentSize(), PhysicsMaterial(1, 0, 1), 1.0f);
+	auto body = PhysicsBody::createEdgeBox(_model->getContentSize(), PhysicsMaterial(1, 0, 1), 0.7f);
 	body->setCategoryBitmask(DefineBitmask::Enemy);
 	body->setCollisionBitmask(DefineBitmask::Character); 
 	body->setContactTestBitmask(DefineBitmask::Character);
@@ -92,8 +92,8 @@ void Enemy::onEnter()
 	// health
 	_healthCtrl = Health::create(_entityStat->_health, "_hp.png");
 	_healthCtrl->setOnDie(CC_CALLBACK_0(Enemy::onDie, this));
-	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 2.5
-		, _model->getContentSize().height / 2.2));
+	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 2
+		, _model->getContentSize().height));
 	this->addChild(_healthCtrl);
 }
 

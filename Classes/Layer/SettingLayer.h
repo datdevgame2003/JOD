@@ -5,11 +5,13 @@
 USING_NS_CC;
 class SettingLayer : public cocos2d::Layer {
 public:
-	
+
 	virtual bool init();
 	CREATE_FUNC(SettingLayer);
 protected:
 	Sprite* background;
+protected:
+	Scene* scene;
 protected:
 	void update(float dt);
 };

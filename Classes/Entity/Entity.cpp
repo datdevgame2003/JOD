@@ -1,5 +1,4 @@
 #include "Entity.h"
-
 Entity* Entity::create(EntityInfo* info)
 {
     auto newObject = new Entity();

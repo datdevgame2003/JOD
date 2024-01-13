@@ -29,6 +29,9 @@ bool GameScene::init(std::string mapName) {
 	{
 		return false;
 	}
+	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	this->getPhysicsWorld()->setGravity(Vec2(0, -98.0f));
+
 	auto winSize = Director::getInstance()->getWinSize();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -36,11 +39,11 @@ bool GameScene::init(std::string mapName) {
 	elapsedTime = 0.0f;
 	Ended = false;
 
-	
+
 	timeLabel = Label::createWithTTF("Time: ", "fonts/Marker Felt.ttf", 30);
 	timeLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
-	timeLabel->enableGlow(Color4B::RED);
-	timeLabel->enableOutline(Color4B::RED, 1);
+	timeLabel->enableGlow(Color4B::BLUE);
+	timeLabel->enableOutline(Color4B::BLUE, 1);
 	this->addChild(timeLabel, 100);
 
 
@@ -58,34 +61,28 @@ bool GameScene::init(std::string mapName) {
 	//enemy
 	TMXObjectGroup* enemySpawnPoint = _gameMap->getObjectGroup("EnemySpawnPoint");
 	auto enemies = enemySpawnPoint->getObjects();
-	
+
 	for (auto enemyInfo : enemies)
 	{
 		ValueMap entityInfo = enemyInfo.asValueMap();
 		std::string name = entityInfo["name"].asString();
 		/*int lv = entityInfo["level"].asInt();
 		auto info = new EntityInfo(lv, name);*/
-	
+
 		auto enemy = Enemy::create(new EntityInfo(1, "slime"));
 
 
-		
+
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
 		enemy->setPosition(position);
-		 
+
 		EntityStat* enemyStat = new EntityStat();
-	    enemy->setEntityStat(enemyStat);
+		enemy->setEntityStat(enemyStat);
 		this->addChild(enemy, 3);
 	}
 
-	//auto enemy = Enemy::create(new EntityInfo(2, "slime"));
-
-	/*this->addChild(enemy, 1);*/
-
-	/*EntityStat* enemyStat = new EntityStat();
-    enemy->setEntityStat(enemyStat);*/
 
 	//Character
 	TMXObjectGroup* objGroup = _gameMap->getObjectGroup("SpawnPoint");
@@ -102,7 +99,7 @@ bool GameScene::init(std::string mapName) {
 	this->addChild(character, 1);
 	this->scheduleUpdate();
 
-	
+
 	auto buttonSetting = ui::Button::create("setting.png");
 	buttonSetting->addTouchEventListener(
 		[=](Ref* sender, ui::Widget::TouchEventType type) {
@@ -129,26 +126,26 @@ bool GameScene::init(std::string mapName) {
 		updateTime(dt);
 		}, 1.0f, "updateTime");
 
-	
+
 	return true;
 }
 void GameScene::update(float dt)
 {
-	
+
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
 	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
 }
 
 void GameScene::updateTime(float dt)
-{ 
+{
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	
+
 	elapsedTime += 1.0f;
 	int remainingTime = static_cast<int>(90.0f - elapsedTime);
 	remainingTime = std::max(remainingTime, 0);
 	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
-	
+
 }
 
 void GameScene::onEnter()
@@ -164,4 +161,3 @@ void GameScene::onEnter()
 
 	this->addChild(KeyboardInput::getInstance());
 }
-
