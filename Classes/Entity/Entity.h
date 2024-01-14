@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "EntityInfo.h"
 #include "EntityStat.h"
+#include "EntityDAL.h"
 USING_NS_CC;
 
 class Entity : public Node
@@ -20,6 +21,7 @@ protected:
 
 protected:
 	EntityInfo* _info;
+	//EntityDAL* _entityDAL;
 	CC_SYNTHESIZE(EntityStat*, _entityStat, EntityStat);
 
 	Sprite* _model;

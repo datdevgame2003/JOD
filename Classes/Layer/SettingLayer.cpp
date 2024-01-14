@@ -43,32 +43,32 @@ bool SettingLayer::init() {
 	buttonresume->setScale(visibleSize.height / buttonresume->getContentSize().height * 0.15);
 	scene->addChild(buttonresume, 101);
 
-    auto buttonQuit = ui::Button::create("home.png");
-    buttonQuit->addTouchEventListener(
-	[&](Ref* sender, ui::Widget::TouchEventType type) {
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			Director::getInstance()->resume();
-			this->removeFromParentAndCleanup(true);
-			Director::getInstance()->replaceScene(MenuScene::createScene());
-			break;
-		case ui::Widget::TouchEventType::CANCELED:
-			break;
-		default:
-			break;
-		}});
-     buttonQuit->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.4));
-     buttonQuit->setScale(visibleSize.height / buttonQuit->getContentSize().height * 0.15);
-     scene->addChild(buttonQuit, 101);
-     this->scheduleUpdate();
-     return true;
+	auto buttonQuit = ui::Button::create("home.png");
+	buttonQuit->addTouchEventListener(
+		[&](Ref* sender, ui::Widget::TouchEventType type) {
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				Director::getInstance()->resume();
+				this->removeFromParentAndCleanup(true);
+				Director::getInstance()->replaceScene(MenuScene::createScene());
+				break;
+			case ui::Widget::TouchEventType::CANCELED:
+				break;
+			default:
+				break;
+			}});
+	buttonQuit->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.4)); //0.4
+	buttonQuit->setScale(visibleSize.height / buttonQuit->getContentSize().height * 0.15);
+	scene->addChild(buttonQuit, 101);
+	this->scheduleUpdate();
+	return true;
 }
 void SettingLayer::update(float dt)
 {
-	Director::getInstance()->getRunningScene();
+	//Director::getInstance()->getRunningScene();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	scene->setPosition(getScene()->getDefaultCamera()->getPosition() + visibleSize / -2);
+	background->setPosition(getScene()->getDefaultCamera()->getPosition() + visibleSize / -2);
 }

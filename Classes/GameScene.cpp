@@ -9,6 +9,7 @@
 #include "audio/include/AudioEngine.h"
 #include "Layer/SettingLayer.h"
 #include "SettingScene.h"
+#include "Bullet/Bullet.h"
 USING_NS_CC;
 
 Scene* GameScene::create(std::string mapName)
@@ -70,9 +71,7 @@ bool GameScene::init(std::string mapName) {
 		auto info = new EntityInfo(lv, name);*/
 
 		auto enemy = Enemy::create(new EntityInfo(1, "slime"));
-
-
-
+		//auto enemy = Enemy::create(info);
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
@@ -94,6 +93,12 @@ bool GameScene::init(std::string mapName) {
 
 	character->setPosition(position);
 	KeyboardInput::getInstance()->addKey(EventKeyboard::KeyCode::KEY_SPACE);
+
+	auto listener = EventListenerMouse::create();
+	listener->onMouseDown = CC_CALLBACK_1(GameScene::onMouseDown, this);
+
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+
 	this->addChild(_gameMap);
 	this->addChild(layer, 100);
 	this->addChild(character, 1);
@@ -160,4 +165,21 @@ void GameScene::onEnter()
 	this->addChild(cam);
 
 	this->addChild(KeyboardInput::getInstance());
+}
+void GameScene::onMouseDown(EventMouse* event)
+{
+	Vec2 camPos = Camera::getDefaultCamera()->getPosition();
+	Vec2 visibleSize = Director::getInstance()->getVisibleSize();
+
+	Vec2 mousPos = camPos - visibleSize / 2 + event->getLocationInView();
+
+	Vec2 direction = mousPos - character->getPosition();
+	direction.normalize();
+	auto bullet = Bullet::create("pumpum");
+
+	bullet->setPosition(character->getPosition());
+	bullet->getPhysicsBody()->setVelocity(direction * 200);
+	bullet->setOwner(character);
+
+	this->addChild(bullet, 1);
 }

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map/map3.tmx",
+    "activeFile": "Map/map1.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -34,8 +34,8 @@
             "scale": 0.6340697674418605,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 627.6911791674307,
-                "y": 1025.9123418301851
+                "x": 803.5393361452411,
+                "y": 426.6092059416835
             }
         },
         "Map/map1.tsx": {
@@ -104,10 +104,10 @@
     ],
     "project": "untitled.tiled-project2.tiled-project",
     "recentFiles": [
-        "Map/map1.tmx",
-        "Map/map2.tmx",
         "Map/map4.tmx",
         "Map/map3.tmx",
+        "Map/map2.tmx",
+        "Map/map1.tmx",
         "C:/Users/Admin/source/repos/FJ/Resources/Maps/map2.tmx"
     ]
 }

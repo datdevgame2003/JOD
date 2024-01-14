@@ -27,6 +27,7 @@ protected:
     void update(float dt) override;
     void onEnter() override;
     //bool checkWinCondition();
+    void onMouseDown(EventMouse* event);
     void updateTime(float dt);
 };
 #endif // __GAME_SCENE_H__

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>frames</key>
+    <dict>
+      <key>slime-attack (3)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{0,0},{33,16.5}}</string>
+        <key>offset</key>
+        <string>{2,-23.75}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{17.5,47.5},{33,16.5}}</string>
+        <key>sourceSize</key>
+        <string>{64,64}</string>
+      </dict>
+      <key>slime-attack (4)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{33,0},{31.5,16.5}}</string>
+        <key>offset</key>
+        <string>{2.75,-23.75}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{19,47.5},{31.5,16.5}}</string>
+        <key>sourceSize</key>
+        <string>{64,64}</string>
+      </dict>
+      <key>slime-attack (2)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{64.5,0},{28,17}}</string>
+        <key>offset</key>
+        <string>{-2.5,-23.5}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{15.5,47},{28,17}}</string>
+        <key>sourceSize</key>
+        <string>{64,64}</string>
+      </dict>
+      <key>slime-attack (5)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{0,16.5},{27.5,17}}</string>
+        <key>offset</key>
+        <string>{-0.25,-23.5}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{18,47},{27.5,17}}</string>
+        <key>sourceSize</key>
+        <string>{64,64}</string>
+      </dict>
+      <key>slime-attack (1)</key>
+      <dict>
+        <key>frame</key>
+        <string>{{27.5,16.5},{26.5,16.5}}</string>
+        <key>offset</key>
+        <string>{-0.25,-23.75}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{18.5,47.5},{26.5,16.5}}</string>
+        <key>sourceSize</key>
+        <string>{64,64}</string>
+      </dict>
+    </dict>
+    <key>metadata</key>
+    <dict>
+      <key>format</key>
+      <integer>2</integer>
+      <key>pixelFormat</key>
+      <string>RGBA8888</string>
+      <key>premultiplyAlpha</key>
+      <false/>
+      <key>realTextureFileName</key>
+      <string>slime-attack.png</string>
+      <key>size</key>
+      <string>{1024,1024}</string>
+      <key>textureFileName</key>
+      <string>slime-attack</string>
+    </dict>
+  </dict>
+</plist>

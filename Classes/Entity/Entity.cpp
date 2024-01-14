@@ -20,6 +20,7 @@ bool Entity::init(EntityInfo* info)
         return false;
     }
     this->_info = info;
+    //_entityDAL = new EntityDAL(_info->_entityName);
     loadAnimations();
     return true;
 }

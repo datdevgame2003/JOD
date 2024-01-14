@@ -1,7 +1,9 @@
 #include "Enemy.h"
+#include "Character/Character.h"
 #include "Utilities/AnimationUtils.h"
 #include "DefineBitmask.h"
 #include "StateEnemy/EnemyIdleState.h"
+#include "StateEnemy/EnemyAttackState.h"
 Enemy* Enemy::create(EntityInfo* info)
 {
 	auto newObject = new Enemy();
@@ -28,6 +30,7 @@ bool Enemy::init(EntityInfo* info)
 
 	_stateMachine = StateMachine::create(this);
 	_stateMachine->addState("idle", new EnemyIdleState());
+	_stateMachine->addState("attack", new EnemyAttackState());
 	_stateMachine->setCurrentState("idle");
 
 	auto lvLabel = Label::createWithSystemFont("Lv. " + std::to_string(info->_level)
@@ -66,8 +69,7 @@ bool Enemy::loadAnimations()
 
 	std::vector<std::string> aniNames;
 	aniNames.push_back(_info->_entityName + "-idle");
-	/*aniNames.push_back(_info->_entityName + "-run");
-	aniNames.push_back(_info->_entityName + "-attack");*/
+	aniNames.push_back(_info->_entityName + "-attack");
 
 	for (auto name : aniNames)
 	{
@@ -101,9 +103,6 @@ bool Enemy::callbackOnContactBegin(PhysicsContact& contact)
 {
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
-
-	if (nodeA != this && nodeB != this) return false;
-
 	log("call at enemy");
 	return false;
 }
