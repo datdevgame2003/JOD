@@ -13,15 +13,15 @@ public:
 	static Entity* create(EntityInfo* info);
 
 	virtual bool init(EntityInfo* info);
-
+	void setLevel(int newLevel);
 	Sprite* getModel() { return _model; }
 	EntityInfo* getEntityInfo() { return _info; }
 protected:
 	virtual bool loadAnimations();
-
+	virtual void onLevelUp(int level);
 protected:
 	EntityInfo* _info;
-	//EntityDAL* _entityDAL;
+	EntityDAL* _entityDAL;
 	CC_SYNTHESIZE(EntityStat*, _entityStat, EntityStat);
 
 	Sprite* _model;

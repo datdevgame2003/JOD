@@ -1,0 +1,11 @@
+{
+    "data": [
+        {
+            "_health": 50,
+            "_attack": 10,
+            "_runSpeed": 150,
+            "_attackSpeed": 1000
+        }
+       
+    ]
+}

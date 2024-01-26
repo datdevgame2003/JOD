@@ -67,14 +67,15 @@ bool GameScene::init(std::string mapName) {
 	{
 		ValueMap entityInfo = enemyInfo.asValueMap();
 		std::string name = entityInfo["name"].asString();
-		/*int lv = entityInfo["level"].asInt();
-		auto info = new EntityInfo(lv, name);*/
+		int lv = entityInfo["level"].asInt();
+		auto info = new EntityInfo(lv, name);
 
-		auto enemy = Enemy::create(new EntityInfo(1, "slime"));
-		//auto enemy = Enemy::create(info);
+		//auto enemy = Enemy::create(new EntityInfo(1, "slime"));
+		
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
+		auto enemy = Enemy::create(info);
 		enemy->setPosition(position);
 
 		EntityStat* enemyStat = new EntityStat();
@@ -94,9 +95,10 @@ bool GameScene::init(std::string mapName) {
 	character->setPosition(position);
 	KeyboardInput::getInstance()->addKey(EventKeyboard::KeyCode::KEY_SPACE);
 
-	auto listener = EventListenerMouse::create();
-	listener->onMouseDown = CC_CALLBACK_1(GameScene::onMouseDown, this);
 
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
+	listener->setSwallowTouches(true);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->addChild(_gameMap);
@@ -116,6 +118,7 @@ bool GameScene::init(std::string mapName) {
 				Director::getInstance()->pause();
 				auto layer = SettingLayer::create();
 				this->addChild(layer, 101);
+				
 				break; }
 			case ui::Widget::TouchEventType::CANCELED:
 				break;
@@ -124,8 +127,120 @@ bool GameScene::init(std::string mapName) {
 			}});
 	buttonSetting->setPosition(Vec2(visibleSize.width / 20, visibleSize.height * 0.9));
 	buttonSetting->setScale(visibleSize.height / buttonSetting->getContentSize().height * 0.1);
-	layer->addChild(buttonSetting, 99);
+	layer->addChild(buttonSetting,10);
+	auto moveUp = ui::Button::create("w.png");
+	moveUp->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+		{
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_W, nullptr);
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_W, nullptr);
+				break;
+			case ui::Widget::TouchEventType::CANCELED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_W, nullptr);
+				break;
+			default:
+				break;
+			}
+		});
 
+	moveUp->setPosition(Vec2(visibleSize.width / 2 - 500, visibleSize.height / 2 - 190));
+	moveUp->setScale(2);
+	moveUp->setOpacity(80);//0-255
+	layer->addChild(moveUp,10);
+	auto moveLeft = ui::Button::create("a.png");
+	moveLeft->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+		{
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_A, nullptr);
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_A, nullptr);
+			case ui::Widget::TouchEventType::CANCELED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_A, nullptr);
+				break;
+			default:
+				break;
+			}
+		});
+
+	moveLeft->setPosition(Vec2(visibleSize.width / 2 - 580, visibleSize.height / 2 - 270));
+	moveLeft->setScale(2);
+	moveLeft->setOpacity(80);//0-255
+	moveLeft->isSwallowTouches();
+	layer->addChild(moveLeft,10);
+	auto moveRight = ui::Button::create("d.png");
+	moveRight->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+		{
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_D, nullptr);
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_D, nullptr);
+			case ui::Widget::TouchEventType::CANCELED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_D, nullptr);
+				break;
+			default:
+				break;
+			}
+		});
+
+	moveRight->setPosition(Vec2(visibleSize.width / 2 - 420, visibleSize.height / 2 - 270));
+	moveRight->setScale(2);
+	moveRight->setOpacity(80);//0-255
+	layer->addChild(moveRight,10);
+	auto moveDown = ui::Button::create("s.png");
+	moveDown->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+		{
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_S, nullptr);
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_S, nullptr);
+			case ui::Widget::TouchEventType::CANCELED:
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_S, nullptr);
+				break;
+			default:
+				break;
+			}
+		});
+
+	moveDown->setPosition(Vec2(visibleSize.width / 2 - 500, visibleSize.height / 2 - 350));
+	moveDown->setScale(2);
+	moveDown->setOpacity(80);//0-255
+	layer->addChild(moveDown,10);
+
+	//auto attack = ui::Button::create("attack.png");
+	//attack->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+	//	{
+	//		switch (type)
+	//		{
+	//		case ui::Widget::TouchEventType::BEGAN:
+	//			KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
+	//			break;
+	//		case ui::Widget::TouchEventType::ENDED:
+	//			KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
+	//		case ui::Widget::TouchEventType::CANCELED:
+	//			KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//	});
+
+	//attack->setPosition(Vec2(visibleSize.width / 2 + 500, visibleSize.height / 2 - 270));
+	//attack->setScale(2);
+	//attack->setOpacity(80);//0-255
+	//layer->addChild(attack,99);
 	this->scheduleUpdate();
 	this->schedule([=](float dt) {
 		updateTime(dt);
@@ -166,20 +281,22 @@ void GameScene::onEnter()
 
 	this->addChild(KeyboardInput::getInstance());
 }
-void GameScene::onMouseDown(EventMouse* event)
+bool GameScene::onTouchBegan(Touch* touch, Event* event)
 {
 	Vec2 camPos = Camera::getDefaultCamera()->getPosition();
 	Vec2 visibleSize = Director::getInstance()->getVisibleSize();
 
-	Vec2 mousPos = camPos - visibleSize / 2 + event->getLocationInView();
+	Vec2 touchPos = camPos - visibleSize / 2 + touch->getLocationInView();
 
-	Vec2 direction = mousPos - character->getPosition();
+	Vec2 direction = touchPos - character->getPosition();
 	direction.normalize();
+	float bulletSpeed = 100.0f;
+	direction *= bulletSpeed;
 	auto bullet = Bullet::create("pumpum");
 
 	bullet->setPosition(character->getPosition());
-	bullet->getPhysicsBody()->setVelocity(direction * 200);
+	bullet->getPhysicsBody()->setVelocity(direction);
 	bullet->setOwner(character);
-
 	this->addChild(bullet, 1);
+	return true;
 }

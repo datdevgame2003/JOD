@@ -90,6 +90,7 @@ bool Setting::init()
     slider1->setPercent(100);
     slider1->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 100));
     this->addChild(slider1);
+
     slider1->addEventListener([=](Ref* sender, ui::Slider::EventType type) {
 
         if (type == ui::Slider::EventType::ON_PERCENTAGE_CHANGED)
@@ -98,6 +99,28 @@ bool Setting::init()
             log("sfx percent: %d", id);
             AudioEngine::setVolume(id, (float)slidermusic->getPercent() / 100);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         });
 
     return true;

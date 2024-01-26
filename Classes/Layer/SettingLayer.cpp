@@ -22,7 +22,7 @@ bool SettingLayer::init() {
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	background->setScale(visibleSize.height / background->getContentSize().height * 0.55);
 	scene->addChild(background, 101);
-
+	
 	auto buttonresume = ui::Button::create("resume.png");
 	buttonresume->addTouchEventListener(
 		[=](Ref* sender, ui::Widget::TouchEventType type) {

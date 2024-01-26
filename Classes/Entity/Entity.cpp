@@ -20,11 +20,26 @@ bool Entity::init(EntityInfo* info)
         return false;
     }
     this->_info = info;
-    //_entityDAL = new EntityDAL(_info->_entityName);
+    _entityDAL = new EntityDAL(_info->_entityName);
+    onLevelUp(_info->_level);
     loadAnimations();
     return true;
 }
+void Entity::setLevel(int newLevel)
+{
+    _info->_level = newLevel;
+    onLevelUp(newLevel);
+}
+void Entity::onLevelUp(int level)
+{
+    auto newStat = _entityDAL->getEntityStat(level);
+    if (newStat == nullptr)
+    {
+        return;
+    }
 
+    _entityStat = newStat;
+}
 bool Entity::loadAnimations()
 {
     return false;

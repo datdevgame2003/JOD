@@ -6,6 +6,7 @@
     "activeFile": "Map/map1.tmx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "C:/Users/Admin/GD1301/Cocos2dxProject/FirstProj/Resources/Map/TX Tileset Grass.tsx": {
             "scaleInDock": 1
@@ -34,7 +35,7 @@
             "scale": 0.6340697674418605,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 803.5393361452411,
+                "x": 801.9622226297452,
                 "y": 426.6092059416835
             }
         },

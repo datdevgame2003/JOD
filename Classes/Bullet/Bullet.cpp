@@ -28,6 +28,7 @@ bool Bullet::init(std::string bulletName)
 
 	auto body = PhysicsBody::createEdgeBox(_model->getContentSize(), PhysicsMaterial(1, 0, 1), 1.0f);
 	body->setCategoryBitmask(DefineBitmask::Bullet);
+	//body->setCollisionBitmask(DefineBitmask::Bullet);
 	body->setCollisionBitmask(DefineBitmask::NON);
 	body->setContactTestBitmask(DefineBitmask::Character | DefineBitmask::Enemy);
 
@@ -60,6 +61,6 @@ bool Bullet::callbackOnContactBegin(PhysicsContact& contact)
 	}
 
 	this->removeFromParentAndCleanup(true);
-
+	//nodeA->removeFromParentAndCleanup(true);
 	return false;
 }

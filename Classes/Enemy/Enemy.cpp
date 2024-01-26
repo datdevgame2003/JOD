@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "Character/Character.h"
 #include "Utilities/AnimationUtils.h"
 #include "DefineBitmask.h"
 #include "StateEnemy/EnemyIdleState.h"
@@ -25,7 +24,7 @@ bool Enemy::init(EntityInfo* info)
 		return false;
 	}
 
-	_model = Sprite::createWithSpriteFrameName(_info->_entityName + "-idle (2)");
+	_model = Sprite::createWithSpriteFrameName(_info->_entityName + "-idle (1)");
 	this->addChild(_model);
 
 	_stateMachine = StateMachine::create(this);
@@ -52,7 +51,7 @@ bool Enemy::init(EntityInfo* info)
 	listener->onContactBegin = CC_CALLBACK_1(Enemy::callbackOnContactBegin, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
+	this->addChild(_stateMachine);
 	return true;
 }
 

@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "_health": 40,
+            "_attack": 10,
+            "_runSpeed": 150,
+            "_attackSpeed": 1000
+        },
+        {
+            "_health": 65,
+            "_attack": 15,
+            "_runSpeed": 175,
+            "_attackSpeed": 1200
+        },
+        {
+            "_health": 80,
+            "_attack": 20,
+            "_runSpeed": 200,
+            "_attackSpeed": 1400
+        },
+        {
+            "_health": 100,
+            "_attack": 25,
+            "_runSpeed": 230,
+            "_attackSpeed": 1700
+        },
+        {
+            "_health": 150,
+            "_attack": 10,
+            "_runSpeed": 270,
+            "_attackSpeed": 2000
+        }
+    ]
+}

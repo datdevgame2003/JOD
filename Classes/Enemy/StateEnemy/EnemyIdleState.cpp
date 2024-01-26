@@ -14,6 +14,7 @@ void EnemyIdleState::enterState(Entity* owner)
 
 std::string EnemyIdleState::updateState()
 {
+	auto keyboard = KeyboardInput::getInstance();
 	/*if (keyboard->getKey(EventKeyboard::KeyCode::KEY_SPACE))
 	{
 		return "attack";
@@ -23,8 +24,10 @@ std::string EnemyIdleState::updateState()
 	{
 		return "run";
 	}*/
-
-	return "idle";
+		return "idle";
+	
+	
+	
 }
 
 void EnemyIdleState::exitState()

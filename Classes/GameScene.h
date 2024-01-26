@@ -23,11 +23,12 @@ protected:
     float elapsedTime;
     bool Ended;
     Label* timeLabel;
+    //std::unordered_map<std::string, int> timeLimits;
 protected:
     void update(float dt) override;
     void onEnter() override;
     //bool checkWinCondition();
-    void onMouseDown(EventMouse* event);
+    bool onTouchBegan(Touch* touch, Event* event);
     void updateTime(float dt);
 };
 #endif // __GAME_SCENE_H__

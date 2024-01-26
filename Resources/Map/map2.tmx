@@ -25,13 +25,13 @@
   </data>
  </layer>
  <objectgroup id="6" name="EnemySpawnPoint">
-  <object id="4" x="541.28" y="553.347">
+  <object id="4" name="slime" x="541.28" y="553.347">
    <point/>
   </object>
-  <object id="5" x="782.615" y="770.548">
+  <object id="5" name="slime" x="782.615" y="770.548">
    <point/>
   </object>
-  <object id="6" x="1339.41" y="332.698">
+  <object id="6" name="slime" x="1339.41" y="332.698">
    <point/>
   </object>
  </objectgroup>

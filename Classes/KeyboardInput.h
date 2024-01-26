@@ -13,10 +13,10 @@ public:
 	void addKey(EventKeyboard::KeyCode key);
 	bool getKey(EventKeyboard::KeyCode key);
 	void removeKey(EventKeyboard::KeyCode key);
-private:
-	bool init() override;
 	void onKeyPressed(EventKeyboard::KeyCode key, Event* ev);
 	void onKeyReleased(EventKeyboard::KeyCode key, Event* ev);
+private:
+	bool init() override;
 private:
 	static KeyboardInput* _instance;
 	std::map<EventKeyboard::KeyCode, bool> _keys;
