@@ -2,10 +2,28 @@
     "data": [
         {
             "_health": 50,
-            "_attack": 10,
+            "_attack": 20,
             "_runSpeed": 150,
             "_attackSpeed": 1000
+        },
+        {
+            "_health": 70,
+            "_attack": 25,
+            "_runSpeed": 175,
+            "_attackSpeed": 1100
+        },
+        {
+            "_health": 100,
+            "_attack": 35,
+            "_runSpeed": 200,
+            "_attackSpeed": 1200
+        },
+        {
+            "_health": 140,
+            "_attack": 45,
+            "_runSpeed": 230,
+            "_attackSpeed": 1250
         }
-       
+        
     ]
 }

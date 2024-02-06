@@ -11,4 +11,4 @@ public:
 	void exitState() override;
 };
 
-#endif // !__CHARACTER_IDLE_STATE_H__
+#endif // !__ENEMY_IDLE_STATE_H__

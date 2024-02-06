@@ -6,7 +6,7 @@ EntityDAL::EntityDAL(std::string entityName)
 {
     rapidjson::Document docs;
 
-    std::string dataContent = cocos2d::FileUtils::getInstance()->getStringFromFile("Data/Entity/" + entityName + ".json");
+    std::string dataContent = cocos2d::FileUtils::getInstance()->getStringFromFile("Data/Entity/" + entityName+ ".json");
     docs.Parse(dataContent.c_str());
 
     auto dataArray = docs["data"].GetArray();

@@ -1,10 +1,11 @@
 #include "GameScene.h"
+#include "GameWinScene.h"
+#include "GameOverScene.h"
 #include "ui/CocosGUI.h"
 #include "Menu.h"
 #include "Enemy/Enemy.h"
 #include "KeyboardInput.h"
 #include "Map/GameMap.h"
-#include "Character/Character.h"
 #include "Camera/CameraFollow.h"
 #include "audio/include/AudioEngine.h"
 #include "Layer/SettingLayer.h"
@@ -37,6 +38,16 @@ bool GameScene::init(std::string mapName) {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	std::map<std::string, int> countdownTimeMap;
+	countdownTimeMap["map1"] = 90;
+	countdownTimeMap["map2"] = 120;
+	countdownTimeMap["map3"] = 150;
+	countdownTimeMap["map4"] = 180;
+	if (countdownTimeMap.find(mapName) != countdownTimeMap.end())
+	{
+		initialCountdownTime = countdownTimeMap[mapName];
+	}
+
 	elapsedTime = 0.0f;
 	Ended = false;
 
@@ -49,15 +60,16 @@ bool GameScene::init(std::string mapName) {
 
 
 	layer = Layer::create();
-	EntityStat* characterStat = new EntityStat();
-	characterStat->_runSpeed = 200.0f;
+	//EntityStat* characterStat = new EntityStat();
+	//characterStat->_runSpeed = 200.0f;*/
 
-	character = Character::create(new EntityInfo(1, "Boy"));
-	character->setEntityStat(characterStat);
+	
+	//character->setEntityStat(characterStat);
 
 
 	_gameMap = GameMap::create(mapName);
 	_gameMap->setTag(99);
+
 
 	//enemy
 	TMXObjectGroup* enemySpawnPoint = _gameMap->getObjectGroup("EnemySpawnPoint");
@@ -67,19 +79,18 @@ bool GameScene::init(std::string mapName) {
 	{
 		ValueMap entityInfo = enemyInfo.asValueMap();
 		std::string name = entityInfo["name"].asString();
-		int lv = entityInfo["level"].asInt();
-		auto info = new EntityInfo(lv, name);
-
-		//auto enemy = Enemy::create(new EntityInfo(1, "slime"));
-		
+		/*int lv = entityInfo["level"].asInt();
+		auto info = new EntityInfo(lv, name);*/
+	    auto enemy = Enemy::create(new EntityInfo(3, "slime"));
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
-		auto enemy = Enemy::create(info);
+		//auto enemy = Enemy::create(info);
 		enemy->setPosition(position);
-
-		EntityStat* enemyStat = new EntityStat();
-		enemy->setEntityStat(enemyStat);
+		/*EntityStat* enemyStat = new EntityStat();
+	    enemy->setEntityStat(enemyStat);*/
+			enemy->setLevel(enemy->getEntityInfo()->_level );
+			
 		this->addChild(enemy, 3);
 	}
 
@@ -87,6 +98,7 @@ bool GameScene::init(std::string mapName) {
 	//Character
 	TMXObjectGroup* objGroup = _gameMap->getObjectGroup("SpawnPoint");
 	ValueMap charPoint = objGroup->getObject("Nv");
+	character = Character::create(new EntityInfo(1, "Boy"));
 
 	Vec2 position;
 	position.x = charPoint["x"].asFloat();
@@ -94,17 +106,26 @@ bool GameScene::init(std::string mapName) {
 
 	character->setPosition(position);
 	KeyboardInput::getInstance()->addKey(EventKeyboard::KeyCode::KEY_SPACE);
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = [=](EventKeyboard::KeyCode key, Event* event) {
+		if (key == EventKeyboard::KeyCode::KEY_TAB)
+		{
+			log("character level up");
 
+			character->setLevel(character->getEntityInfo()->_level + 1);
+
+		}
+	};
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	listener->setSwallowTouches(true);
-	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 	this->addChild(_gameMap);
 	this->addChild(layer, 100);
 	this->addChild(character, 1);
-	this->scheduleUpdate();
 
 
 	auto buttonSetting = ui::Button::create("setting.png");
@@ -127,7 +148,7 @@ bool GameScene::init(std::string mapName) {
 			}});
 	buttonSetting->setPosition(Vec2(visibleSize.width / 20, visibleSize.height * 0.9));
 	buttonSetting->setScale(visibleSize.height / buttonSetting->getContentSize().height * 0.1);
-	layer->addChild(buttonSetting,10);
+	layer->addChild(buttonSetting);
 	auto moveUp = ui::Button::create("w.png");
 	moveUp->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
@@ -172,8 +193,7 @@ bool GameScene::init(std::string mapName) {
 	moveLeft->setPosition(Vec2(visibleSize.width / 2 - 580, visibleSize.height / 2 - 270));
 	moveLeft->setScale(2);
 	moveLeft->setOpacity(80);//0-255
-	moveLeft->isSwallowTouches();
-	layer->addChild(moveLeft,10);
+	layer->addChild(moveLeft);
 	auto moveRight = ui::Button::create("d.png");
 	moveRight->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
@@ -195,7 +215,7 @@ bool GameScene::init(std::string mapName) {
 	moveRight->setPosition(Vec2(visibleSize.width / 2 - 420, visibleSize.height / 2 - 270));
 	moveRight->setScale(2);
 	moveRight->setOpacity(80);//0-255
-	layer->addChild(moveRight,10);
+	layer->addChild(moveRight);
 	auto moveDown = ui::Button::create("s.png");
 	moveDown->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
@@ -217,7 +237,7 @@ bool GameScene::init(std::string mapName) {
 	moveDown->setPosition(Vec2(visibleSize.width / 2 - 500, visibleSize.height / 2 - 350));
 	moveDown->setScale(2);
 	moveDown->setOpacity(80);//0-255
-	layer->addChild(moveDown,10);
+	layer->addChild(moveDown);
 
 	//auto attack = ui::Button::create("attack.png");
 	//attack->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
@@ -246,7 +266,6 @@ bool GameScene::init(std::string mapName) {
 		updateTime(dt);
 		}, 1.0f, "updateTime");
 
-
 	return true;
 }
 void GameScene::update(float dt)
@@ -262,7 +281,7 @@ void GameScene::updateTime(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
 	elapsedTime += 1.0f;
-	int remainingTime = static_cast<int>(90.0f - elapsedTime);
+	int remainingTime = static_cast<int>(initialCountdownTime - elapsedTime);
 	remainingTime = std::max(remainingTime, 0);
 	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
 
@@ -283,20 +302,54 @@ void GameScene::onEnter()
 }
 bool GameScene::onTouchBegan(Touch* touch, Event* event)
 {
-	Vec2 camPos = Camera::getDefaultCamera()->getPosition();
-	Vec2 visibleSize = Director::getInstance()->getVisibleSize();
 
-	Vec2 touchPos = camPos - visibleSize / 2 + touch->getLocationInView();
-
-	Vec2 direction = touchPos - character->getPosition();
+	Vec2 touchPos = touch->getLocation();
+	Vec2 characterPos = character->getPosition();
+	Vec2 direction = touchPos - characterPos;
 	direction.normalize();
-	float bulletSpeed = 100.0f;
-	direction *= bulletSpeed;
 	auto bullet = Bullet::create("pumpum");
-
-	bullet->setPosition(character->getPosition());
-	bullet->getPhysicsBody()->setVelocity(direction);
+	bullet->setPosition(characterPos);
+	bullet->getPhysicsBody()->setVelocity(direction * 300);
 	bullet->setOwner(character);
 	this->addChild(bullet, 1);
 	return true;
 }
+bool GameScene::checkWinCondition()
+{
+	if (!Ended)
+
+		if (elapsedTime <= 30.0f)
+		{
+			Vec2 characterTilePos = _gameMap->convertPosTileMap(character->getPosition());
+
+			if (_gameMap->getMetaAtPos(characterTilePos) == GameMap::MetaGreen)
+			{
+
+				CCLOG("You win");
+				this->removeChild(character);
+				character = nullptr;
+				auto gamewinScene = GameWinScene::create();
+				Director::getInstance()->replaceScene(gamewinScene);
+				//Director::getInstance()->replaceScene(GameWinScene::createScene());
+				Ended = true;
+				return true;
+
+			}
+		}
+
+
+	//if (elapsedTime > 30.0f)
+	//{
+	//	CCLOG("You lose!");
+	//	//this->removeChild(character);
+	//	//character = nullptr;
+
+	//	//Director::getInstance()->replaceScene(GameOverScene::createScene());
+	//	Ended = true;
+	//	return true;
+
+	//}
+	return false;
+
+}
+

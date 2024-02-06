@@ -23,12 +23,7 @@
             "_attack": 25,
             "_runSpeed": 230,
             "_attackSpeed": 1700
-        },
-        {
-            "_health": 150,
-            "_attack": 10,
-            "_runSpeed": 270,
-            "_attackSpeed": 2000
         }
+        
     ]
 }

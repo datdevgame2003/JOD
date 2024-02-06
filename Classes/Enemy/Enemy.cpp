@@ -1,8 +1,9 @@
-#include "Enemy.h"
+#include "Enemy/Enemy.h"
 #include "Utilities/AnimationUtils.h"
 #include "DefineBitmask.h"
 #include "StateEnemy/EnemyIdleState.h"
 #include "StateEnemy/EnemyAttackState.h"
+
 Enemy* Enemy::create(EntityInfo* info)
 {
 	auto newObject = new Enemy();
@@ -41,7 +42,7 @@ bool Enemy::init(EntityInfo* info)
 	this->addChild(lvLabel);
 
 
-	auto body = PhysicsBody::createEdgeBox(_model->getContentSize(), PhysicsMaterial(1, 0, 1), 0.7f);
+	auto body = PhysicsBody::createEdgeBox(_model->getContentSize(), PhysicsMaterial(1, 0, 1), 1.0f);
 	body->setCategoryBitmask(DefineBitmask::Enemy);
 	body->setCollisionBitmask(DefineBitmask::Character); 
 	body->setContactTestBitmask(DefineBitmask::Character);
@@ -52,6 +53,7 @@ bool Enemy::init(EntityInfo* info)
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	this->addChild(_stateMachine);
+
 	return true;
 }
 
@@ -102,6 +104,7 @@ bool Enemy::callbackOnContactBegin(PhysicsContact& contact)
 {
 	auto nodeA = contact.getShapeA()->getBody()->getNode();
 	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != this && nodeB != this) return false;
 	log("call at enemy");
 	return false;
 }

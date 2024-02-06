@@ -1,7 +1,6 @@
 #ifndef  __GAME_SCENE_H__
 #define  __GAME_SCENE_H__
 #include "cocos2d.h"
-#include "GameScene.h"
 #include "Character/Character.h"
 #include "Map/GameMap.h"
 #include "ui/CocosGUI.h"
@@ -22,12 +21,13 @@ protected:
     GameMap* _gameMap;
     float elapsedTime;
     bool Ended;
+    int enemyLevelMap;
     Label* timeLabel;
-    //std::unordered_map<std::string, int> timeLimits;
+    int initialCountdownTime;
 protected:
     void update(float dt) override;
     void onEnter() override;
-    //bool checkWinCondition();
+    bool checkWinCondition();
     bool onTouchBegan(Touch* touch, Event* event);
     void updateTime(float dt);
 };

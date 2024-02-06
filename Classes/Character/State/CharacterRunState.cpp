@@ -1,7 +1,7 @@
 #include "CharacterRunState.h"
 #include "StateMachine/StateMachine.h"
 #include "KeyboardInput.h"
-
+#include "GameWinScene.h"
 void CharacterRunState::enterState(Entity* owner)
 {
 	State::enterState(owner);
@@ -26,8 +26,8 @@ std::string CharacterRunState::updateState()
 	if (_map->getMetaAtPos(nextPosition) != GameMap::MetaRed)
 		_owner->setPosition(nextPosition);
 
-	/*if (_map->getMetaAtPos(nextPosition) == GameMap::MetaGreen)
-		Director::getInstance()->replaceScene(GameWinScene::createScene());*/
+	if (_map->getMetaAtPos(nextPosition) == GameMap::MetaGreen)
+		Director::getInstance()->replaceScene(GameWinScene::create());
 
 	if (direction.x != 0)
 		_owner->getModel()->setFlippedX(direction.x < 0);

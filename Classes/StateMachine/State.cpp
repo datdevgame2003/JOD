@@ -13,6 +13,6 @@ std::string State::updateState()
 
 void State::exitState()
 {
-	_owner->getModel()->stopAllActions();
-	//_owner->getModel()->stopActionByTag(StateMachine::AnimationTag);
+	//_owner->getModel()->stopAllActions();
+	_owner->getModel()->stopActionByTag(StateMachine::AnimationTag);
 }

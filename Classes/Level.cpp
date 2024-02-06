@@ -1,8 +1,10 @@
 #include "json/document.h"
+#include "json/rapidjson.h"
 #include "ui/CocosGUI.h"
 #include "GameScene.h"
 #include "Level.h"
 #include "Menu.h"
+#include "Entity/EntityDAL.h"
 bool Level::init()
 {
 	if (!Scene::init())
@@ -15,7 +17,7 @@ bool Level::init()
 	maps.push_back("map1");
 	maps.push_back("map2");
 	maps.push_back("map3");
-	/*maps.push_back("map4");*/
+	maps.push_back("map4");
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();

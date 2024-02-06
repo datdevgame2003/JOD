@@ -3,11 +3,59 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map/map1.tmx",
+    "activeFile": "Map/map4.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "C:/Users/Admin/Downloads/Map (1)/gate.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map2.tmx": {
+            "scale": 0.5801063829787234,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 740.381441408399,
+                "y": 471.4652484870714
+            }
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map2wall.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map3.tmx": {
+            "scale": 0.4288013698630137,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1461.0494369459307,
+                "y": 472.2466256688763
+            }
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map3.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map3wall.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map4.tmx": {
+            "scale": 0.2996153846153846,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1460.2053915275994,
+                "y": 912.836970474968
+            }
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map4.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/map4wall.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/Admin/Downloads/Map (1)/meta.tsx": {
+            "scaleInDock": 1
+        },
         "C:/Users/Admin/GD1301/Cocos2dxProject/FirstProj/Resources/Map/TX Tileset Grass.tsx": {
             "scaleInDock": 1
         },
@@ -36,7 +84,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 801.9622226297452,
-                "y": 426.6092059416835
+                "y": 412.415184302219
             }
         },
         "Map/map1.tsx": {
@@ -50,7 +98,7 @@
                 6
             ],
             "scale": 0.5801063829787234,
-            "selectedLayer": 4,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 738.6576196589035,
                 "y": 471.4652484870714
@@ -70,7 +118,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 1458.7173548438625,
-                "y": 465.25037936267074
+                "y": 469.91454356680777
             }
         },
         "Map/map3.tsx": {
@@ -80,11 +128,14 @@
             "scaleInDock": 1
         },
         "Map/map4.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 3,
+            "expandedObjectLayers": [
+                6
+            ],
+            "scale": 0.33,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 1460,
-                "y": 909
+                "x": 989.3939393939393,
+                "y": 634.8484848484848
             }
         },
         "Map/map4.tsx": {
@@ -105,10 +156,13 @@
     ],
     "project": "untitled.tiled-project2.tiled-project",
     "recentFiles": [
-        "Map/map4.tmx",
-        "Map/map3.tmx",
-        "Map/map2.tmx",
         "Map/map1.tmx",
+        "Map/map2.tmx",
+        "Map/map3.tmx",
+        "Map/map4.tmx",
+        "C:/Users/Admin/Downloads/Map (1)/map2.tmx",
+        "C:/Users/Admin/Downloads/Map (1)/map3.tmx",
+        "C:/Users/Admin/Downloads/Map (1)/map4.tmx",
         "C:/Users/Admin/source/repos/FJ/Resources/Maps/map2.tmx"
     ]
 }
