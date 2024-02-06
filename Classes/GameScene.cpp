@@ -74,23 +74,32 @@ bool GameScene::init(std::string mapName) {
 	//enemy
 	TMXObjectGroup* enemySpawnPoint = _gameMap->getObjectGroup("EnemySpawnPoint");
 	auto enemies = enemySpawnPoint->getObjects();
-
+	int baseEnemyLevel = 1;
 	for (auto enemyInfo : enemies)
 	{
 		ValueMap entityInfo = enemyInfo.asValueMap();
 		std::string name = entityInfo["name"].asString();
 		/*int lv = entityInfo["level"].asInt();
 		auto info = new EntityInfo(lv, name);*/
-	    auto enemy = Enemy::create(new EntityInfo(3, "slime"));
+
+		int mapLevelModifier = 0;
+		if (mapName == "map2") {
+			mapLevelModifier = 1;
+		}
+		else if (mapName == "map3") {
+			mapLevelModifier = 2;
+		}
+		else if (mapName == "map4") {
+			mapLevelModifier = 3;
+		}
+		int enemyLevel = baseEnemyLevel + mapLevelModifier;
+	    //auto enemy = Enemy::create(new EntityInfo(3, "slime"));
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
 		//auto enemy = Enemy::create(info);
+		auto enemy = Enemy::create(new EntityInfo(enemyLevel, "slime"));
 		enemy->setPosition(position);
-		/*EntityStat* enemyStat = new EntityStat();
-	    enemy->setEntityStat(enemyStat);*/
-			enemy->setLevel(enemy->getEntityInfo()->_level );
-			
 		this->addChild(enemy, 3);
 	}
 
@@ -318,7 +327,7 @@ bool GameScene::checkWinCondition()
 {
 	if (!Ended)
 
-		if (elapsedTime <= 30.0f)
+		if (elapsedTime <= initialCountdownTime)
 		{
 			Vec2 characterTilePos = _gameMap->convertPosTileMap(character->getPosition());
 

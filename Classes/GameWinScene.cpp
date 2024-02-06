@@ -6,16 +6,6 @@
 #include "AudioEngine.h"
 USING_NS_CC;
 
-Scene* GameWinScene::createScene()
-{
-	return GameWinScene::create();
-}
-
-static void problemLoading(const char* filename) {
-	printf("Error while loading: %s\n", filename);
-	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
-}
-
 bool GameWinScene::init() {
 	if (!Scene::init())
 	{
@@ -24,19 +14,19 @@ bool GameWinScene::init() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	//AudioEngine::play2d("Audio/yeah.mp3", false, 1.0f);
-	auto background = Sprite::create("setting_bg.png");
+	auto background = Sprite::create("gamewin.png");
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	background->setScale(1.5f);
+	background->setScale(2.0f);
 	this->addChild(background);
 
-	auto label = Label::createWithTTF("Win", "fonts/Marker Felt.ttf", 40);
+	/*auto label = Label::createWithTTF("Win", "fonts/Marker Felt.ttf", 40);
 	label->setTextColor(Color4B::BLUE);
 	label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	this->addChild(label);
+	this->addChild(label);*/
 
-	/*auto buttonExit = ui::Button::create("ui5.png", "ui5.png");
+	auto buttonExit = ui::Button::create("ui5.png", "ui5.png");
 	buttonExit->addTouchEventListener(
-		[&](Ref* sender, ui::Widget::TouchEventType type) {
+		[=](Ref* sender, ui::Widget::TouchEventType type) {
 			switch (type)
 			{
 			case ui::Widget::TouchEventType::BEGAN:
@@ -50,7 +40,7 @@ bool GameWinScene::init() {
 				break;
 			}});
 	buttonExit->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.2));
-	this->addChild(buttonExit);*/
+	this->addChild(buttonExit);
 
 	/*auto buttonagain = ui::Button::create("again.png", "again.png");
 	buttonagain->addTouchEventListener(
