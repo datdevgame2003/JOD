@@ -13,6 +13,7 @@ public:
 	virtual bool init(EntityInfo* info) override;
 
 	void takeDamage(Entity* attacker) override;
+	void attack();
 protected:
 	bool loadAnimations() override;
 
@@ -22,6 +23,7 @@ protected:
 
 	void onEnter();
 	bool callbackOnContactBegin(PhysicsContact& contact);
+	void playDeathAnimation();
 protected:
 	StateMachine* _stateMachine;
 };

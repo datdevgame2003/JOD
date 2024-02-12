@@ -14,6 +14,7 @@ public:
 
 protected:
 	bool loadAnimations() override;
+	bool callbackOnContactBegin(PhysicsContact& contact);
 protected:
 	StateMachine* _stateMachine;
 protected:

@@ -3,7 +3,8 @@
 #include "DefineBitmask.h"
 #include "StateEnemy/EnemyIdleState.h"
 #include "StateEnemy/EnemyAttackState.h"
-
+#include "StateEnemy/EnemyDeadState.h"
+#include "Bullet/Bullet.h"
 Enemy* Enemy::create(EntityInfo* info)
 {
 	auto newObject = new Enemy();
@@ -31,6 +32,7 @@ bool Enemy::init(EntityInfo* info)
 	_stateMachine = StateMachine::create(this);
 	_stateMachine->addState("idle", new EnemyIdleState());
 	_stateMachine->addState("attack", new EnemyAttackState());
+	_stateMachine->addState("dead", new EnemyDeadState());
 	_stateMachine->setCurrentState("idle");
 
 	auto lvLabel = Label::createWithSystemFont("Lv. " + std::to_string(info->_level)
@@ -71,6 +73,7 @@ bool Enemy::loadAnimations()
 	std::vector<std::string> aniNames;
 	aniNames.push_back(_info->_entityName + "-idle");
 	aniNames.push_back(_info->_entityName + "-attack");
+	aniNames.push_back(_info->_entityName + "-dead");
 
 	for (auto name : aniNames)
 	{
@@ -85,7 +88,8 @@ void Enemy::onDie()
 {
 	log("die");
 	// add effects....
-	this->removeFromParentAndCleanup(true);
+	playDeathAnimation();
+	/*this->removeFromParentAndCleanup(true);*/
 }
 
 void Enemy::onEnter()
@@ -107,4 +111,28 @@ bool Enemy::callbackOnContactBegin(PhysicsContact& contact)
 	if (nodeA != this && nodeB != this) return false;
 	log("call at enemy");
 	return false;
+}
+void Enemy::attack()
+{
+	auto bullet = Bullet::create("pumchiu");
+	bullet->setPosition(this->getPosition());
+
+
+	this->getParent()->addChild(bullet, 1);
+}
+void Enemy::playDeathAnimation() {
+	auto ani = AnimationCache::getInstance()->getAnimation(_info->_entityName + "-dead");
+	if (ani) {
+		_model->stopAllActions();
+		auto animate = RepeatForever::create(Animate::create(ani));
+		animate->setTag(StateMachine::AnimationTag);
+		_model->runAction(animate);
+	}
+	auto delay = DelayTime::create(2.0f);
+	auto callback = CallFunc::create([this]() {
+		this->removeFromParentAndCleanup(true);
+		});
+
+	auto sequence = Sequence::create(delay, callback, nullptr);
+	_model->runAction(sequence);
 }

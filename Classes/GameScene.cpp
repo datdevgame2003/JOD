@@ -283,6 +283,7 @@ void GameScene::update(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
 	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
+	
 }
 
 void GameScene::updateTime(float dt)

@@ -72,3 +72,12 @@ void Character::onEnter()
 		, _model->getContentSize().height));
 	this->addChild(_healthCtrl);
 }
+bool Character::callbackOnContactBegin(PhysicsContact& contact)
+{
+	auto nodeA = contact.getShapeA()->getBody()->getNode();
+	auto nodeB = contact.getShapeB()->getBody()->getNode();
+	if (nodeA != this && nodeB != this) return false;
+	log("call at character");
+	return false;
+
+}
