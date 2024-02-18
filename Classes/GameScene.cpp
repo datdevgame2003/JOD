@@ -11,6 +11,7 @@
 #include "Layer/SettingLayer.h"
 #include "SettingScene.h"
 #include "Bullet/Bullet.h"
+#include "AudioEngine.h"
 USING_NS_CC;
 
 Scene* GameScene::create(std::string mapName)
@@ -115,23 +116,13 @@ bool GameScene::init(std::string mapName) {
 
 	character->setPosition(position);
 	KeyboardInput::getInstance()->addKey(EventKeyboard::KeyCode::KEY_SPACE);
-	auto keyboardListener = EventListenerKeyboard::create();
-	keyboardListener->onKeyPressed = [=](EventKeyboard::KeyCode key, Event* event) {
-		if (key == EventKeyboard::KeyCode::KEY_TAB)
-		{
-			log("character level up");
-
-			character->setLevel(character->getEntityInfo()->_level + 1);
-
-		}
-	};
+	
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	listener->setSwallowTouches(true);
 
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 	this->addChild(_gameMap);
 	this->addChild(layer, 100);
 	this->addChild(character, 1);
@@ -283,7 +274,18 @@ void GameScene::update(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
 	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
-	
+	/*Vector<Node*> children = this->getChildren();
+	for (auto child : children)
+	{
+		Enemy* enemy = dynamic_cast<Enemy*>(child);
+		if (enemy)
+		{
+			if (character)
+			{
+				enemy->shootBullet(character->getPosition());
+			}
+		}
+	}*/
 }
 
 void GameScene::updateTime(float dt)
@@ -312,17 +314,26 @@ void GameScene::onEnter()
 }
 bool GameScene::onTouchBegan(Touch* touch, Event* event)
 {
-
-	Vec2 touchPos = touch->getLocation();
-	Vec2 characterPos = character->getPosition();
-	Vec2 direction = touchPos - characterPos;
-	direction.normalize();
-	auto bullet = Bullet::create("pumpum");
-	bullet->setPosition(characterPos);
-	bullet->getPhysicsBody()->setVelocity(direction * 300);
-	bullet->setOwner(character);
-	this->addChild(bullet, 1);
-	return true;
+	/*if (!attackSoundPlayed)
+	{
+		int id = AudioEngine::play2d("Audio/attack.mp3", false, 1.0f);
+		CCLOG("Attack Sound ID: %d", id);
+		attackSoundPlayed = true;
+		this->scheduleOnce([this](float dt) {
+			attackSoundPlayed = true;
+			}, 0.1f, "resetAttackSound");*/
+	    Vec2 touchPos = touch->getLocation();
+		Vec2 characterPos = character->getPosition();
+		Vec2 direction = touchPos - characterPos;
+		direction.normalize();
+		auto bullet = Bullet::create("pumpum");
+		bullet->setPosition(characterPos);
+		bullet->getPhysicsBody()->setVelocity(direction * 300);
+		bullet->setOwner(character);
+		this->addChild(bullet, 1);
+		//return true;
+	//}
+	return false;
 }
 bool GameScene::checkWinCondition()
 {

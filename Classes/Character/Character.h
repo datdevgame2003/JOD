@@ -11,7 +11,7 @@ public:
 	static Character* create(EntityInfo* info);
 
 	bool init(EntityInfo* info) override;
-
+	void takeDamage(Entity* attacker);
 protected:
 	bool loadAnimations() override;
 	bool callbackOnContactBegin(PhysicsContact& contact);
@@ -21,8 +21,7 @@ protected:
 
 	Health* _healthCtrl;
 
-	//void onDie();
-
+	void onDie();
 	void onEnter();
 };
 

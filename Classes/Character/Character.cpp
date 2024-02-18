@@ -53,6 +53,7 @@ bool Character::loadAnimations()
 	aniNames.push_back(_info->_entityName + "-idle");
 	aniNames.push_back(_info->_entityName + "-run");
 	aniNames.push_back(_info->_entityName + "-attack");
+	
 
 	for (auto name : aniNames)
 	{
@@ -68,6 +69,7 @@ void Character::onEnter()
 
 	// health
 	_healthCtrl = Health::create(_entityStat->_health, "_hp.png");
+	_healthCtrl->setOnDie(CC_CALLBACK_0(Character::onDie, this));
 	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 2
 		, _model->getContentSize().height));
 	this->addChild(_healthCtrl);
@@ -81,3 +83,11 @@ bool Character::callbackOnContactBegin(PhysicsContact& contact)
 	return false;
 
 }
+void Character::onDie()
+{
+	log("character die");
+	// add effects....
+
+	this->removeFromParentAndCleanup(true);
+}
+

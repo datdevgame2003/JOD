@@ -30,7 +30,7 @@ bool Bullet::init(std::string bulletName)
 	body->setCategoryBitmask(DefineBitmask::Bullet);
 	body->setCollisionBitmask(DefineBitmask::NON);
 	body->setContactTestBitmask(DefineBitmask::Character | DefineBitmask::Enemy);
-	body->setContactTestBitmask(DefineBitmask::Enemy| DefineBitmask::Character);
+	//body->setContactTestBitmask(DefineBitmask::Enemy| DefineBitmask::Character);
 
     this->setPhysicsBody(body);
 

@@ -1,4 +1,5 @@
-#include "Enemy/Enemy.h"
+﻿#include "Enemy/Enemy.h"
+#include "Character/Character.h"
 #include "Utilities/AnimationUtils.h"
 #include "DefineBitmask.h"
 #include "StateEnemy/EnemyIdleState.h"
@@ -112,14 +113,19 @@ bool Enemy::callbackOnContactBegin(PhysicsContact& contact)
 	log("call at enemy");
 	return false;
 }
-void Enemy::attack()
-{
-	auto bullet = Bullet::create("pumchiu");
-	bullet->setPosition(this->getPosition());
+//void Enemy::shootBullet(const Vec2& targetPosition)
+//{
+//	//Vec2 bulletDirection = targetPosition - this->getPosition();
+//	//bulletDirection.normalize();
+//	auto bullet = Bullet::create("pumchiu");
+//	bullet->setPosition(this->getPosition());
+//	Vec2 direction = targetPosition - bullet->getPosition();
+//	direction.normalize();
+//	float bulletSpeed = 500.0f;
+//	bullet->getPhysicsBody()->setVelocity(direction * bulletSpeed);
+//	this->getParent()->addChild(bullet, 1);
+//}
 
-
-	this->getParent()->addChild(bullet, 1);
-}
 void Enemy::playDeathAnimation() {
 	auto ani = AnimationCache::getInstance()->getAnimation(_info->_entityName + "-dead");
 	if (ani) {
@@ -136,3 +142,16 @@ void Enemy::playDeathAnimation() {
 	auto sequence = Sequence::create(delay, callback, nullptr);
 	_model->runAction(sequence);
 }
+//void Enemy::update(float dt) {
+//	// Gọi phương thức cơ bản của lớp Entity
+//	Entity::update(dt);
+//
+//	Vec2 characterPosition = character->getPosition();
+//	float distance = this->getPosition().distance(characterPosition);
+//
+//	// Nếu khoảng cách nhỏ hơn một ngưỡng nhất định (ví dụ: 200px)
+//	if (distance < 200.0f) {
+//		// Bắn đạn
+//		this->shootBullet(characterPosition);
+//	}
+//}

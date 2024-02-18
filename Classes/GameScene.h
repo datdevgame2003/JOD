@@ -24,6 +24,7 @@ protected:
     int enemyLevelMap;
     Label* timeLabel;
     int initialCountdownTime;
+   // bool attackSoundPlayed;
 protected:
     void update(float dt) override;
     void onEnter() override;

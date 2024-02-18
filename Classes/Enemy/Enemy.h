@@ -5,7 +5,7 @@
 #include "IDamageable.h"
 #include "Health/Health.h"
 #include "StateMachine/StateMachine.h"
-
+#include "Character/Character.h"
 class Enemy : public Entity, public IDamageable
 {
 public:
@@ -13,19 +13,20 @@ public:
 	virtual bool init(EntityInfo* info) override;
 
 	void takeDamage(Entity* attacker) override;
-	void attack();
+	//void shootBullet(const Vec2& targetPosition);
 protected:
 	bool loadAnimations() override;
 
 	Health* _healthCtrl;
 
 	void onDie();
-
+	//void update(float dt);
 	void onEnter();
 	bool callbackOnContactBegin(PhysicsContact& contact);
 	void playDeathAnimation();
 protected:
 	StateMachine* _stateMachine;
+	Character* character;
 };
 
 #endif // !__ENEMY_H__

@@ -9,7 +9,6 @@ class EntityInfo
 public:
 	int _level;
 	std::string _entityName;
-	std::string mapName;
 	EntityInfo(int level, std::string name)
 	{
 		this->_entityName = name;
