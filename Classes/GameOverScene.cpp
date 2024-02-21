@@ -43,7 +43,7 @@ bool GameOverScene::init() {
 			default:
 				break;
 			}});
-	buttonExit->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2.8));
+	buttonExit->setPosition(Vec2(visibleSize.width / 2, visibleSize.height * 0.2));
 	this->addChild(buttonExit);
 
 	/*auto buttonagain = ui::Button::create("again.png", "again.png");

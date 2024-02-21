@@ -263,7 +263,7 @@ void GameScene::updateTime(float dt)
 	int remainingTime = static_cast<int>(180.0f - elapsedTime);
 	remainingTime = std::max(remainingTime, 0);
 	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
-	
+	checkWinCondition();
 }
 
 void GameScene::onEnter()
@@ -305,40 +305,38 @@ bool GameScene::onTouchBegan(Touch* touch, Event* event)
 bool GameScene::checkWinCondition()
 {
 	if (!Ended)
-
-		if ()
+	{
+		if (initialCountdownTime > 0)
 		{
-			Vec2 characterTilePos = _gameMap->convertPosTileMap(character->getPosition());
+			elapsedTime += Director::getInstance()->getDeltaTime();
+			int remainingTime = static_cast<int>(initialCountdownTime - elapsedTime);
+			remainingTime = std::max(remainingTime, 0);
+			timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
 
-			if (_gameMap->getMetaAtPos(characterTilePos) == GameMap::MetaGreen)
+			if (elapsedTime >= initialCountdownTime)
 			{
-
-				CCLOG("You win");
+				CCLOG("You lose!");
 				this->removeChild(character);
 				character = nullptr;
-				auto gamewinScene = GameWinScene::create();
-				Director::getInstance()->replaceScene(gamewinScene);
-				//Director::getInstance()->replaceScene(GameWinScene::createScene());
-				Ended = true;
+				Director::getInstance()->replaceScene(GameOverScene::createScene());
 				return true;
-
 			}
 		}
+		Vec2 characterTilePos = _gameMap->convertPosTileMap(character->getPosition());
+		if (_gameMap->getMetaAtPos(characterTilePos) == GameMap::MetaGreen)
+		{
+			CCLOG("You win");
+			this->removeChild(character);
+			character = nullptr;
+			auto gamewinScene = GameWinScene::create();
+			Director::getInstance()->replaceScene(gamewinScene);
+			Ended = true;
+			return true;
+		}
 
-
-	if (remainingTime <= 0)
-	{
-		CCLOG("You lose!");
-		//this->removeChild(character);
-		//character = nullptr;
-		auto gameloseScene = GameOverScene::create();
-		Director::getInstance()->replaceScene(gameloseScene);
-		//Director::getInstance()->replaceScene(GameOverScene::createScene());
-		Ended = true;
-		return true;
-
+		return false;
 	}
-	return false;
 
+	return false;
 }
 
