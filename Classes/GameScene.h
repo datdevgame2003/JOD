@@ -23,7 +23,7 @@ protected:
     bool Ended;
     int enemyLevelMap;
     Label* timeLabel;
-    int initialCountdownTime;
+    float initialCountdownTime;
    // bool attackSoundPlayed;
 protected:
     void update(float dt) override;

@@ -36,6 +36,10 @@ void StateMachine::setCurrentState(std::string stateName)
 {
     _currentState = stateName;
 }
+std::string StateMachine::getState()
+{
+    return _currentState;
+}
 
 void StateMachine::update(float dt)
 {

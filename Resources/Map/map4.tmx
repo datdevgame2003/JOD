@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="146" height="67" tilewidth="20" tileheight="20" infinite="0" nextlayerid="7" nextobjectid="10">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="146" height="67" tilewidth="20" tileheight="20" infinite="0" nextlayerid="7" nextobjectid="31">
  <tileset firstgid="1" source="map4.tsx"/>
  <tileset firstgid="31" source="meta.tsx"/>
  <tileset firstgid="33" source="map4wall.tsx"/>
@@ -32,6 +32,69 @@
    <point/>
   </object>
   <object id="9" name="slime" x="378.788" y="793.939">
+   <point/>
+  </object>
+  <object id="10" name="slime" x="1181.82" y="530.303">
+   <point/>
+  </object>
+  <object id="11" name="slime" x="1821.21" y="469.697">
+   <point/>
+  </object>
+  <object id="12" name="slime" x="2139.39" y="593.939">
+   <point/>
+  </object>
+  <object id="13" name="slime" x="2503.03" y="387.879">
+   <point/>
+  </object>
+  <object id="14" name="slime" x="2700" y="193.939">
+   <point/>
+  </object>
+  <object id="15" name="slime" x="1106.06" y="1254.55">
+   <point/>
+  </object>
+  <object id="16" name="slime" x="1342.42" y="1042.42">
+   <point/>
+  </object>
+  <object id="17" name="slime" x="1739.39" y="718.182">
+   <point/>
+  </object>
+  <object id="18" name="slime" x="2784.85" y="530.303">
+   <point/>
+  </object>
+  <object id="19" name="slime" x="1906.06" y="1248.48">
+   <point/>
+  </object>
+  <object id="20" name="slime" x="2378.79" y="948.485">
+   <point/>
+  </object>
+  <object id="21" name="slime" x="1103.03" y="721.212">
+   <point/>
+  </object>
+  <object id="22" name="slime" x="945.455" y="366.667">
+   <point/>
+  </object>
+  <object id="23" name="slime" x="457.576" y="212.121">
+   <point/>
+  </object>
+  <object id="24" name="slime" x="700" y="615.152">
+   <point/>
+  </object>
+  <object id="25" name="slime" x="142.424" y="478.788">
+   <point/>
+  </object>
+  <object id="26" name="slime" x="1121.21" y="1057.58">
+   <point/>
+  </object>
+  <object id="27" name="slime" x="2703.03" y="854.545">
+   <point/>
+  </object>
+  <object id="28" name="slime" x="1978.79" y="281.818">
+   <point/>
+  </object>
+  <object id="29" name="slime" x="624.242" y="300">
+   <point/>
+  </object>
+  <object id="30" name="slime" x="624.242" y="1200">
    <point/>
   </object>
  </objectgroup>

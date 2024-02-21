@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="146" height="47" tilewidth="20" tileheight="20" infinite="0" nextlayerid="8" nextobjectid="9">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="146" height="47" tilewidth="20" tileheight="20" infinite="0" nextlayerid="8" nextobjectid="24">
  <tileset firstgid="1" source="map3.tsx"/>
  <tileset firstgid="31" source="map3wall.tsx"/>
  <tileset firstgid="61" source="gate.tsx"/>
@@ -32,6 +32,51 @@
    <point/>
   </object>
   <object id="8" name="slime" x="1182.37" y="137.593">
+   <point/>
+  </object>
+  <object id="9" name="slime" x="2856.8" y="151.585">
+   <point/>
+  </object>
+  <object id="10" name="slime" x="2541.97" y="272.854">
+   <point/>
+  </object>
+  <object id="11" name="slime" x="783.58" y="163.246">
+   <point/>
+  </object>
+  <object id="12" name="slime" x="1019.12" y="312.499">
+   <point/>
+  </object>
+  <object id="13" name="slime" x="1343.28" y="445.428">
+   <point/>
+  </object>
+  <object id="14" name="slime" x="860.538" y="676.304">
+   <point/>
+  </object>
+  <object id="15" name="slime" x="1583.48" y="506.062">
+   <point/>
+  </object>
+  <object id="16" name="slime" x="1819.02" y="230.876">
+   <point/>
+  </object>
+  <object id="17" name="slime" x="1982.27" y="438.431">
+   <point/>
+  </object>
+  <object id="18" name="slime" x="2301.77" y="305.503">
+   <point/>
+  </object>
+  <object id="19" name="slime" x="2863.8" y="848.878">
+   <point/>
+  </object>
+  <object id="20" name="slime" x="1665.11" y="848.878">
+   <point/>
+  </object>
+  <object id="21" name="slime" x="1180.03" y="851.21">
+   <point/>
+  </object>
+  <object id="22" name="slime" x="946.825" y="450.092">
+   <point/>
+  </object>
+  <object id="23" name="slime" x="785.912" y="853.542">
    <point/>
   </object>
  </objectgroup>

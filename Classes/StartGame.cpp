@@ -24,7 +24,7 @@ bool StartGame::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto background = Sprite::create("br.png");
+    auto background = Sprite::create("background.png");
     background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(background, -1);
 

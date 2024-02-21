@@ -39,11 +39,11 @@ bool GameScene::init(std::string mapName) {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	std::map<std::string, int> countdownTimeMap;
-	countdownTimeMap["map1"] = 90;
-	countdownTimeMap["map2"] = 120;
-	countdownTimeMap["map3"] = 150;
-	countdownTimeMap["map4"] = 180;
+	std::map<std::string, float> countdownTimeMap;
+	countdownTimeMap["map1"] = 10.0f;
+	countdownTimeMap["map2"] = 120.0f;
+	countdownTimeMap["map3"] = 150.0f;
+	countdownTimeMap["map4"] = 180.0f;
 	if (countdownTimeMap.find(mapName) != countdownTimeMap.end())
 	{
 		initialCountdownTime = countdownTimeMap[mapName];
@@ -101,7 +101,7 @@ bool GameScene::init(std::string mapName) {
 		//auto enemy = Enemy::create(info);
 		auto enemy = Enemy::create(new EntityInfo(enemyLevel, "slime"));
 		enemy->setPosition(position);
-		this->addChild(enemy, 3);
+		this->addChild(enemy, 24);
 	}
 
 
@@ -239,28 +239,6 @@ bool GameScene::init(std::string mapName) {
 	moveDown->setOpacity(80);//0-255
 	layer->addChild(moveDown);
 
-	//auto attack = ui::Button::create("attack.png");
-	//attack->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
-	//	{
-	//		switch (type)
-	//		{
-	//		case ui::Widget::TouchEventType::BEGAN:
-	//			KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
-	//			break;
-	//		case ui::Widget::TouchEventType::ENDED:
-	//			KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
-	//		case ui::Widget::TouchEventType::CANCELED:
-	//			KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
-	//			break;
-	//		default:
-	//			break;
-	//		}
-	//	});
-
-	//attack->setPosition(Vec2(visibleSize.width / 2 + 500, visibleSize.height / 2 - 270));
-	//attack->setScale(2);
-	//attack->setOpacity(80);//0-255
-	//layer->addChild(attack,99);
 	this->scheduleUpdate();
 	this->schedule([=](float dt) {
 		updateTime(dt);
@@ -274,18 +252,7 @@ void GameScene::update(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
 	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
-	/*Vector<Node*> children = this->getChildren();
-	for (auto child : children)
-	{
-		Enemy* enemy = dynamic_cast<Enemy*>(child);
-		if (enemy)
-		{
-			if (character)
-			{
-				enemy->shootBullet(character->getPosition());
-			}
-		}
-	}*/
+
 }
 
 void GameScene::updateTime(float dt)
@@ -293,10 +260,10 @@ void GameScene::updateTime(float dt)
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
 	elapsedTime += 1.0f;
-	int remainingTime = static_cast<int>(initialCountdownTime - elapsedTime);
+	int remainingTime = static_cast<int>(180.0f - elapsedTime);
 	remainingTime = std::max(remainingTime, 0);
 	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
-
+	
 }
 
 void GameScene::onEnter()
@@ -339,7 +306,7 @@ bool GameScene::checkWinCondition()
 {
 	if (!Ended)
 
-		if (elapsedTime <= initialCountdownTime)
+		if ()
 		{
 			Vec2 characterTilePos = _gameMap->convertPosTileMap(character->getPosition());
 
@@ -359,17 +326,18 @@ bool GameScene::checkWinCondition()
 		}
 
 
-	//if (elapsedTime > 30.0f)
-	//{
-	//	CCLOG("You lose!");
-	//	//this->removeChild(character);
-	//	//character = nullptr;
+	if (remainingTime <= 0)
+	{
+		CCLOG("You lose!");
+		//this->removeChild(character);
+		//character = nullptr;
+		auto gameloseScene = GameOverScene::create();
+		Director::getInstance()->replaceScene(gameloseScene);
+		//Director::getInstance()->replaceScene(GameOverScene::createScene());
+		Ended = true;
+		return true;
 
-	//	//Director::getInstance()->replaceScene(GameOverScene::createScene());
-	//	Ended = true;
-	//	return true;
-
-	//}
+	}
 	return false;
 
 }

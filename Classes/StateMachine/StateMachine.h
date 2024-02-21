@@ -16,7 +16,7 @@ public:
 
 	void addState(std::string stateName, State* newState);
 	void setCurrentState(std::string stateName);
-
+	std::string getState();
 protected:
 	std::map<std::string, State*> _states;
 	std::string _currentState;

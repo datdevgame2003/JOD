@@ -6,6 +6,7 @@
 #include "StateEnemy/EnemyAttackState.h"
 #include "StateEnemy/EnemyDeadState.h"
 #include "Bullet/Bullet.h"
+#define CHARACTER_TAG 1
 Enemy* Enemy::create(EntityInfo* info)
 {
 	auto newObject = new Enemy();

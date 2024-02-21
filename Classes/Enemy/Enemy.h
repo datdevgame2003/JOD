@@ -14,6 +14,8 @@ public:
 
 	void takeDamage(Entity* attacker) override;
 	//void shootBullet(const Vec2& targetPosition);
+	std::string getState(); 
+	//void stopMoving();
 protected:
 	bool loadAnimations() override;
 
@@ -25,6 +27,7 @@ protected:
 	bool callbackOnContactBegin(PhysicsContact& contact);
 	void playDeathAnimation();
 protected:
+	//std::string getState();
 	StateMachine* _stateMachine;
 	Character* character;
 };
