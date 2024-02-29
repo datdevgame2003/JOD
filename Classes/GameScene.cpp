@@ -1,4 +1,4 @@
-#include "GameScene.h"
+﻿#include "GameScene.h"
 #include "GameWinScene.h"
 #include "GameOverScene.h"
 #include "ui/CocosGUI.h"
@@ -34,16 +34,16 @@ bool GameScene::init(std::string mapName) {
 	}
 	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -98.0f));
-
+	
 	auto winSize = Director::getInstance()->getWinSize();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+	/*std::string _currentMapName;*/
 	std::map<std::string, float> countdownTimeMap;
 	countdownTimeMap["map1"] = 10.0f;
-	countdownTimeMap["map2"] = 120.0f;
-	countdownTimeMap["map3"] = 150.0f;
-	countdownTimeMap["map4"] = 180.0f;
+	countdownTimeMap["map2"] = 60.0f;
+	countdownTimeMap["map3"] = 100.0f;
+	countdownTimeMap["map4"] = 120.0f;
 	if (countdownTimeMap.find(mapName) != countdownTimeMap.end())
 	{
 		initialCountdownTime = countdownTimeMap[mapName];
@@ -61,11 +61,6 @@ bool GameScene::init(std::string mapName) {
 
 
 	layer = Layer::create();
-	//EntityStat* characterStat = new EntityStat();
-	//characterStat->_runSpeed = 200.0f;*/
-
-	
-	//character->setEntityStat(characterStat);
 
 
 	_gameMap = GameMap::create(mapName);
@@ -94,11 +89,9 @@ bool GameScene::init(std::string mapName) {
 			mapLevelModifier = 3;
 		}
 		int enemyLevel = baseEnemyLevel + mapLevelModifier;
-	    //auto enemy = Enemy::create(new EntityInfo(3, "slime"));
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
-		//auto enemy = Enemy::create(info);
 		auto enemy = Enemy::create(new EntityInfo(enemyLevel, "slime"));
 		enemy->setPosition(position);
 		this->addChild(enemy, 24);
@@ -127,6 +120,22 @@ bool GameScene::init(std::string mapName) {
 	this->addChild(layer, 100);
 	this->addChild(character, 1);
 
+	//auto restartButton = ui::Button::create("restart.png"); // Thay đổi hình ảnh button theo ý muốn
+	//restartButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+	//	{
+	//		if (type == ui::Widget::TouchEventType::ENDED)
+	//		{
+	//			// Kiểm tra map đang chơi
+	//			
+	//				// Chơi lại map đang chơi
+	//				auto gameScene = GameScene::create(_mapName);
+	//				Director::getInstance()->replaceScene(gameScene);
+	//			
+	//		}
+	//	});
+	//restartButton->setPosition(Vec2(origin.x + visibleSize.width - restartButton->getContentSize().width / 2,
+	//	origin.y + visibleSize.height - restartButton->getContentSize().height / 2));
+	//layer->addChild(restartButton);
 
 	auto buttonSetting = ui::Button::create("setting.png");
 	buttonSetting->addTouchEventListener(
@@ -149,6 +158,7 @@ bool GameScene::init(std::string mapName) {
 	buttonSetting->setPosition(Vec2(visibleSize.width / 20, visibleSize.height * 0.9));
 	buttonSetting->setScale(visibleSize.height / buttonSetting->getContentSize().height * 0.1);
 	layer->addChild(buttonSetting);
+
 	auto moveUp = ui::Button::create("w.png");
 	moveUp->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
@@ -239,6 +249,7 @@ bool GameScene::init(std::string mapName) {
 	moveDown->setOpacity(80);//0-255
 	layer->addChild(moveDown);
 
+
 	this->scheduleUpdate();
 	this->schedule([=](float dt) {
 		updateTime(dt);
@@ -316,8 +327,8 @@ bool GameScene::checkWinCondition()
 			if (elapsedTime >= initialCountdownTime)
 			{
 				CCLOG("You lose!");
-				this->removeChild(character);
-				character = nullptr;
+				//this->removeChild(character);
+				//character = nullptr;
 				Director::getInstance()->replaceScene(GameOverScene::createScene());
 				return true;
 			}
@@ -339,4 +350,3 @@ bool GameScene::checkWinCondition()
 
 	return false;
 }
-

@@ -33,7 +33,7 @@ bool GameWinScene::init() {
 				break;
 			case ui::Widget::TouchEventType::ENDED:
 				Director::getInstance()->replaceScene(TransitionFade::create(2, MenuScene::createScene()));
-				break;
+					break;
 			case ui::Widget::TouchEventType::CANCELED:
 				break;
 			default:

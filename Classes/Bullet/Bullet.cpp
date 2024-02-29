@@ -1,4 +1,4 @@
-#include "Bullet.h"
+﻿#include "Bullet.h"
 #include "DefineBitmask.h"
 #include "IDamageable.h"
 
@@ -49,7 +49,21 @@ bool Bullet::callbackOnContactBegin(PhysicsContact& contact)
 	if (nodeA != this && nodeB != this) return false;
 
 	auto target = (nodeA == this) ? (nodeB) : (nodeA);
+	//auto gameMap = dynamic_cast<GameMap*>(target->getParent());
+	//if (gameMap != nullptr)
+	//{
+	//	// Chuyển đổi vị trí thế giới của đạn sang vị trí cục bộ trên GameMap
+	//	Vec2 worldPos = this->getParent()->convertToWorldSpace(this->getPosition());
+	//	Vec2 localPos = gameMap->convertToNodeSpace(worldPos);
+	//	int metaType = gameMap->getMetaAtPos(localPos);
 
+	//	// Kiểm tra xem tile có thuộc tính MetaRed không
+	//	if (metaType == GameMap::MetaRed)
+	//	{
+	//		this->removeFromParentAndCleanup(true);
+	//		return true; // Kết thúc phương thức
+	//	}
+	//}
 	log("a: %d | b: %d", nodeA->getPhysicsBody()->getCategoryBitmask()
 		, nodeB->getPhysicsBody()->getCategoryBitmask());
 	log("a & b: %d", (nodeA->getPhysicsBody()->getCategoryBitmask() | nodeB->getPhysicsBody()->getCategoryBitmask()));

@@ -34,7 +34,7 @@ bool Level::init()
 			case ui::Widget::TouchEventType::BEGAN:
 				break;
 			case ui::Widget::TouchEventType::ENDED:
-				CCLOG("Button 1 clicked!");
+				CCLOG("Back clicked!");
 				Director::getInstance()->replaceScene(TransitionFade::create(1, MenuScene::create()));
 				break;
 			case ui::Widget::TouchEventType::CANCELED:

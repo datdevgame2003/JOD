@@ -13,8 +13,8 @@ public:
     static Scene* create(std::string mapName);
 
     virtual bool init(std::string mapName);
-    
-    //static const int idAudio;
+   
+        //static const int idAudio;
 protected:
     Layer* layer;
     Character* character;
@@ -31,5 +31,7 @@ protected:
     bool checkWinCondition();
     bool onTouchBegan(Touch* touch, Event* event);
     void updateTime(float dt);
+
 };
+
 #endif // __GAME_SCENE_H__
