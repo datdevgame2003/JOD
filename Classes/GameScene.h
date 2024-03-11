@@ -20,17 +20,24 @@ protected:
     Character* character;
     GameMap* _gameMap;
     float elapsedTime;
-    bool Ended;
     int enemyLevelMap;
     Label* timeLabel;
     float initialCountdownTime;
-   // bool attackSoundPlayed;
+    int bGM;
+    int soundAttack;
+    int clickAudio;
+    bool Ended;
+    
+
 protected:
     void update(float dt) override;
     void onEnter() override;
     bool checkWinCondition();
+    void onExit();
     bool onTouchBegan(Touch* touch, Event* event);
     void updateTime(float dt);
+private:
+    bool attackSoundPlayed;
 
 };
 

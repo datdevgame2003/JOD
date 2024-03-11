@@ -10,6 +10,10 @@ public:
 	virtual bool init();
 	void playAgainCallback(cocos2d::Ref* pSender);
 	CREATE_FUNC(GameWinScene);
+protected:
+	void onExit();
+	int soundWin;
+	int clickAudio;
 
 };
 #endif // __GAMEWIN_SCENE_H__

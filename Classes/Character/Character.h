@@ -22,7 +22,7 @@ protected:
 	Health* _healthCtrl;
 
 	void onDie();
-	void onEnter();
+	//void onEnter();
 };
 
 #endif // !__CHARACTER_H__

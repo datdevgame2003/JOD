@@ -11,6 +11,8 @@ public:
 	bool init() override;
 	//int count = 0;
 	CREATE_FUNC(Level);
+protected:
+	int clickAudio;
 };
 
 #endif // !__TEST_H__

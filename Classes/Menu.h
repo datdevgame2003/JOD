@@ -15,6 +15,8 @@ public:
 
     // implement the "static create()" method manually
     CREATE_FUNC(MenuScene);
+private:
+    int _percent;
 };
 
 #endif // __MENU_H__

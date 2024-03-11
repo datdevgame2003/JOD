@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "Menu.h"
 #include "Entity/EntityDAL.h"
+#include"AudioEngine.h"
 bool Level::init()
 {
 	if (!Scene::init())
@@ -26,12 +27,13 @@ bool Level::init()
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	background->setScale(3);
 	this->addChild(background, -1);
-	auto button1 = ui::Button::create("home.png");
+	auto button1 = ui::Button::create("back.png");
 	button1->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
 			switch (type)
 			{
 			case ui::Widget::TouchEventType::BEGAN:
+				clickAudio = AudioEngine::play2d("Audio/click.mp3");
 				break;
 			case ui::Widget::TouchEventType::ENDED:
 				CCLOG("Back clicked!");
@@ -64,6 +66,7 @@ bool Level::init()
 			{
 				if (type == ui::Widget::TouchEventType::ENDED)
 				{
+					clickAudio = AudioEngine::play2d("Audio/click.mp3");
 					auto gameScene = GameScene::create(maps[i]);
 					Director::getInstance()->replaceScene(gameScene);
 				}

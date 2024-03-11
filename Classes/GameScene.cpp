@@ -27,28 +27,34 @@ Scene* GameScene::create(std::string mapName)
 	return nullptr;
 }
 
-bool GameScene::init(std::string mapName) {
+bool GameScene::init(std::string mapName)
+{
 	if (!Scene::initWithPhysics())
 	{
 		return false;
 	}
 	this->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	this->getPhysicsWorld()->setGravity(Vec2(0, -98.0f));
-	
-	auto winSize = Director::getInstance()->getWinSize();
+	//auto winSize = Director::getInstance()->getWinSize();
+
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	/*std::string _currentMapName;*/
-	std::map<std::string, float> countdownTimeMap;
-	countdownTimeMap["map1"] = 10.0f;
-	countdownTimeMap["map2"] = 60.0f;
-	countdownTimeMap["map3"] = 100.0f;
-	countdownTimeMap["map4"] = 120.0f;
+
+	bGM = AudioEngine::play2d("Audio/BGM.mp3", false, 1.0f);
+	AudioEngine::setFinishCallback(bGM, [=](int audioId, const std::string& filePath)
+		{
+			bGM = AudioEngine::play2d("Audio/BGM.mp3", false, 1.0f);
+		});
+
+	std::map<std::string, int> countdownTimeMap;
+	countdownTimeMap["map1"] = 60;
+	countdownTimeMap["map2"] = 5;
+	countdownTimeMap["map3"] = 90;
+	countdownTimeMap["map4"] = 120;
 	if (countdownTimeMap.find(mapName) != countdownTimeMap.end())
 	{
 		initialCountdownTime = countdownTimeMap[mapName];
 	}
-
 	elapsedTime = 0.0f;
 	Ended = false;
 
@@ -59,14 +65,11 @@ bool GameScene::init(std::string mapName) {
 	timeLabel->enableOutline(Color4B::BLUE, 1);
 	this->addChild(timeLabel, 100);
 
-
 	layer = Layer::create();
-
 
 	_gameMap = GameMap::create(mapName);
 	_gameMap->setTag(99);
-
-
+	
 	//enemy
 	TMXObjectGroup* enemySpawnPoint = _gameMap->getObjectGroup("EnemySpawnPoint");
 	auto enemies = enemySpawnPoint->getObjects();
@@ -75,9 +78,6 @@ bool GameScene::init(std::string mapName) {
 	{
 		ValueMap entityInfo = enemyInfo.asValueMap();
 		std::string name = entityInfo["name"].asString();
-		/*int lv = entityInfo["level"].asInt();
-		auto info = new EntityInfo(lv, name);*/
-
 		int mapLevelModifier = 0;
 		if (mapName == "map2") {
 			mapLevelModifier = 1;
@@ -89,53 +89,35 @@ bool GameScene::init(std::string mapName) {
 			mapLevelModifier = 3;
 		}
 		int enemyLevel = baseEnemyLevel + mapLevelModifier;
+		//auto enemy = Enemy::create(info);
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
 		auto enemy = Enemy::create(new EntityInfo(enemyLevel, "slime"));
 		enemy->setPosition(position);
-		this->addChild(enemy, 24);
+		this->addChild(enemy, 22);
 	}
-
-
-	//Character
+	//character
 	TMXObjectGroup* objGroup = _gameMap->getObjectGroup("SpawnPoint");
 	ValueMap charPoint = objGroup->getObject("Nv");
 	character = Character::create(new EntityInfo(1, "Boy"));
-
 	Vec2 position;
 	position.x = charPoint["x"].asFloat();
 	position.y = charPoint["y"].asFloat();
 
 	character->setPosition(position);
 	KeyboardInput::getInstance()->addKey(EventKeyboard::KeyCode::KEY_SPACE);
-	
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(GameScene::onTouchBegan, this);
 	listener->setSwallowTouches(true);
-
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-	this->addChild(_gameMap);
-	this->addChild(layer, 100);
-	this->addChild(character, 1);
 
-	//auto restartButton = ui::Button::create("restart.png"); // Thay đổi hình ảnh button theo ý muốn
-	//restartButton->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
-	//	{
-	//		if (type == ui::Widget::TouchEventType::ENDED)
-	//		{
-	//			// Kiểm tra map đang chơi
-	//			
-	//				// Chơi lại map đang chơi
-	//				auto gameScene = GameScene::create(_mapName);
-	//				Director::getInstance()->replaceScene(gameScene);
-	//			
-	//		}
-	//	});
-	//restartButton->setPosition(Vec2(origin.x + visibleSize.width - restartButton->getContentSize().width / 2,
-	//	origin.y + visibleSize.height - restartButton->getContentSize().height / 2));
-	//layer->addChild(restartButton);
+	this->addChild(_gameMap);
+	this->addChild(character, 1);
+	this->addChild(layer, 100);
+	this->scheduleUpdate();
+
 
 	auto buttonSetting = ui::Button::create("setting.png");
 	buttonSetting->addTouchEventListener(
@@ -148,17 +130,42 @@ bool GameScene::init(std::string mapName) {
 				Director::getInstance()->pause();
 				auto layer = SettingLayer::create();
 				this->addChild(layer, 101);
-				
 				break; }
 			case ui::Widget::TouchEventType::CANCELED:
 				break;
 			default:
 				break;
 			}});
-	buttonSetting->setPosition(Vec2(visibleSize.width / 20, visibleSize.height * 0.9));
+	buttonSetting->setPosition(Vec2(visibleSize.width / 2 + 550, visibleSize.height / 2 + 350));
 	buttonSetting->setScale(visibleSize.height / buttonSetting->getContentSize().height * 0.1);
-	layer->addChild(buttonSetting);
+	layer->addChild(buttonSetting, 99);
 
+
+	auto button1 = ui::Button::create("back.png");
+	button1->setTitleText("Back");
+	button1->setTitleFontName("fonts/victoria.ttf");
+	button1->setTitleFontSize(40);
+	button1->setTitleColor(Color3B::BLACK);
+	button1->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
+		{
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				clickAudio = AudioEngine::play2d("Audio/click.mp3");
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				CCLOG("Button 1 clicked!");
+				Director::getInstance()->replaceScene(TransitionFade::create(1, MenuScene::create()));
+				break;
+			case ui::Widget::TouchEventType::CANCELED:
+				break;
+			default:
+				break;
+			}
+		});
+	button1->setPosition(Vec2(visibleSize.width / 2 - 550, visibleSize.height / 2 + 350));
+	button1->setScale(1.5);
+	layer->addChild(button1);
 	auto moveUp = ui::Button::create("w.png");
 	moveUp->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
@@ -181,7 +188,7 @@ bool GameScene::init(std::string mapName) {
 	moveUp->setPosition(Vec2(visibleSize.width / 2 - 500, visibleSize.height / 2 - 190));
 	moveUp->setScale(2);
 	moveUp->setOpacity(80);//0-255
-	layer->addChild(moveUp,10);
+	layer->addChild(moveUp);
 	auto moveLeft = ui::Button::create("a.png");
 	moveLeft->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
@@ -249,34 +256,29 @@ bool GameScene::init(std::string mapName) {
 	moveDown->setOpacity(80);//0-255
 	layer->addChild(moveDown);
 
+	//sound
+	attackSoundPlayed = false;
 
 	this->scheduleUpdate();
-	this->schedule([=](float dt) {
-		updateTime(dt);
-		}, 1.0f, "updateTime");
-
+	this->schedule([=](float dt) {updateTime(dt);}, 1.0f, "updateTime");
 	return true;
 }
 void GameScene::update(float dt)
 {
-
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	layer->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / -2);
 	timeLabel->setPosition(this->getDefaultCamera()->getPosition() + visibleSize / 3);
-
 }
-
 void GameScene::updateTime(float dt)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
 	elapsedTime += 1.0f;
-	int remainingTime = static_cast<int>(180.0f - elapsedTime);
+	int remainingTime = static_cast<int>(initialCountdownTime - elapsedTime);
 	remainingTime = std::max(remainingTime, 0);
 	timeLabel->setString(StringUtils::format("Time: %d", remainingTime));
 	checkWinCondition();
 }
-
 void GameScene::onEnter()
 {
 	Scene::onEnter();
@@ -292,25 +294,29 @@ void GameScene::onEnter()
 }
 bool GameScene::onTouchBegan(Touch* touch, Event* event)
 {
-	/*if (!attackSoundPlayed)
+	if (!attackSoundPlayed)
 	{
-		int id = AudioEngine::play2d("Audio/attack.mp3", false, 1.0f);
-		CCLOG("Attack Sound ID: %d", id);
+		soundAttack = AudioEngine::play2d("Audio/attack.mp3", false, 1.0f);
+		CCLOG("Attack Sound ID: %d", soundAttack);
 		attackSoundPlayed = true;
 		this->scheduleOnce([this](float dt) {
-			attackSoundPlayed = true;
-			}, 0.1f, "resetAttackSound");*/
-	    Vec2 touchPos = touch->getLocation();
+			attackSoundPlayed = false;
+			}, 0.1f, "resetAttackSound");
+		Vec2 touchPos = touch->getLocation();
 		Vec2 characterPos = character->getPosition();
 		Vec2 direction = touchPos - characterPos;
 		direction.normalize();
-		auto bullet = Bullet::create("pumpum");
+		auto bullet = Bullet::create("bullet");
 		bullet->setPosition(characterPos);
-		bullet->getPhysicsBody()->setVelocity(direction * 300);
+		float bulletSpeed = 200.0f;
+		direction *= bulletSpeed;
+		bullet->getPhysicsBody()->setVelocity(direction);
 		bullet->setOwner(character);
 		this->addChild(bullet, 1);
-		//return true;
-	//}
+
+		return true;
+	}
+
 	return false;
 }
 bool GameScene::checkWinCondition()
@@ -327,8 +333,8 @@ bool GameScene::checkWinCondition()
 			if (elapsedTime >= initialCountdownTime)
 			{
 				CCLOG("You lose!");
-				//this->removeChild(character);
-				//character = nullptr;
+				this->removeChild(character, true);
+				character = nullptr;
 				Director::getInstance()->replaceScene(GameOverScene::createScene());
 				return true;
 			}
@@ -337,7 +343,7 @@ bool GameScene::checkWinCondition()
 		if (_gameMap->getMetaAtPos(characterTilePos) == GameMap::MetaGreen)
 		{
 			CCLOG("You win");
-			this->removeChild(character);
+			this->removeChild(character, true);
 			character = nullptr;
 			auto gamewinScene = GameWinScene::create();
 			Director::getInstance()->replaceScene(gamewinScene);
@@ -350,3 +356,9 @@ bool GameScene::checkWinCondition()
 
 	return false;
 }
+void GameScene::onExit()
+{
+	AudioEngine::stop(bGM);
+	Scene::onExit();
+};
+

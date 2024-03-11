@@ -1,6 +1,7 @@
 #include "StartGame.h"
 #include "Menu.h"
 #include "ui/CocosGUI.h"
+#include "AudioEngine.h"
 USING_NS_CC;
 
 Scene* StartGame::createScene()
@@ -23,9 +24,10 @@ bool StartGame::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    int clickAudio;
     auto background = Sprite::create("background.png");
     background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    background->setScaleY(1.1);
     this->addChild(background, -1);
 
     auto nameGame = Label::createWithTTF("Journey Of Discovery", "fonts/victoria.ttf", 150);
@@ -43,6 +45,7 @@ bool StartGame::init()
             switch (type)
             {
             case ui::Widget::TouchEventType::BEGAN:
+                clickAudio = AudioEngine::play2d("Audio/click.mp3");
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("Button 1 clicked!");

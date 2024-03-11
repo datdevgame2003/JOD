@@ -2,6 +2,7 @@
 #include "KeyboardInput.h"
 #include "StateMachine/StateMachine.h"
 
+//dead state of enemy
 void EnemyDeadState::enterState(Entity* owner)
 {
 	State::enterState(owner);

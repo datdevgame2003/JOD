@@ -9,6 +9,9 @@ public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(GameOverScene);
-
+protected:
+	void onExit();
+	int soundLose;
+	int clickAudio;
 };
 #endif // __GAMEOVER_SCENE_H__

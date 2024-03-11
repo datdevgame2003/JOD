@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "ui/CocosGUI.h"
 #include "ui/UIRichText.h"
+#include"AudioEngine.h"
 USING_NS_CC;
 
 Scene* Tutorial::createScene()
@@ -25,21 +26,23 @@ bool Tutorial::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	int clickAudio;
 	auto background = Sprite::create("setting_bg.png");
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	background->setScale(3);
 	this->addChild(background, -1);
 
-	auto button = ui::Button::create("14.png");
+	auto button = ui::Button::create("back.png");
 	button->setTitleText("Back");
 	button->setTitleFontName("fonts/victoria.ttf");
-	button->setTitleFontSize(100);
+	button->setTitleFontSize(40);
 	button->setTitleColor(Color3B::BLACK);
 	button->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type)
 		{
 			switch (type)
 			{
 			case ui::Widget::TouchEventType::BEGAN:
+				clickAudio = AudioEngine::play2d("Audio/click.mp3");
 				break;
 			case ui::Widget::TouchEventType::ENDED:
 				CCLOG("Button 1 clicked!");
@@ -51,13 +54,13 @@ bool Tutorial::init()
 				break;
 			}
 		});
-	button->setPosition(Vec2(visibleSize.width * 0.1, visibleSize.height * 0.9));
-	button->setScale(0.5);
+	button->setPosition(Vec2(visibleSize.width / 2 - 550, visibleSize.height / 2 + 350));
+	button->setScale(1.5);
 	this->addChild(button);
 	ui::RichText* richtext = ui::RichText::create();
 	richtext->ignoreContentAdaptWithSize(false);
 	richtext->setContentSize(Size(1000, 800));
-	richtext->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + 250 - origin.y));
+	richtext->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + 200 - origin.y));
 
 	ui::RichElementText* hello = ui::RichElementText::create(1, Color3B::BLACK, 255, "Welcome to Journey of Discovery!", "victoria.ttf", 30);
 	ui::RichElementText* hello1 = ui::RichElementText::create(1, Color3B::BLACK, 255, "\nYou will participate in an exciting journey in a maze full of mysteries and challenges. Get ready to explore and tackle monsters to reach the final goal.", "victoria.ttf", 24);
@@ -70,7 +73,7 @@ bool Tutorial::init()
 	ui::RichText* richtext1 = ui::RichText::create();
 	richtext1->ignoreContentAdaptWithSize(false);
 	richtext1->setContentSize(Size(1000, 800));
-	richtext1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2.5 + origin.y));
+	richtext1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
 
 	ui::RichElementText* moveC1 = ui::RichElementText::create(1, Color3B::BLACK, 255, "- Use navigation keys", "victoria.ttf", 24);

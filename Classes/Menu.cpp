@@ -4,6 +4,7 @@
 #include "Layer/SettingLayer.h"
 #include "ui/CocosGUI.h"
 #include "TutorialScene.h"
+#include"AudioEngine.h"
 #include "Level.h"
 USING_NS_CC;
 
@@ -24,7 +25,7 @@ bool MenuScene::init() {
 	}
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+    int clickAudio;
     auto nameGame = Label::createWithTTF("Journey Of Discovery", "fonts/victoria.ttf", 150);
     nameGame->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 + 250));
     nameGame->enableGlow(Color4B::GREEN);
@@ -32,6 +33,7 @@ bool MenuScene::init() {
 
     auto background = Sprite::create("mainmenu.png");
     background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    background->setScaleY(1.1);
     this->addChild(background, -1);
 
     auto button = ui::Button::create("14.png");
@@ -44,6 +46,7 @@ bool MenuScene::init() {
             switch (type)
             {
             case ui::Widget::TouchEventType::BEGAN:
+                clickAudio = AudioEngine::play2d("Audio/click.mp3");
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("Level clicked!");
@@ -69,6 +72,7 @@ bool MenuScene::init() {
             switch (type)
             {
             case ui::Widget::TouchEventType::BEGAN:
+                clickAudio = AudioEngine::play2d("Audio/click.mp3");
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("setting clicked!");
@@ -94,6 +98,7 @@ bool MenuScene::init() {
             switch (type)
             {
             case ui::Widget::TouchEventType::BEGAN:
+                clickAudio = AudioEngine::play2d("Audio/click.mp3");
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("Tutorial clicked!");
@@ -119,6 +124,7 @@ bool MenuScene::init() {
             switch (type)
             {
             case ui::Widget::TouchEventType::BEGAN:
+                clickAudio = AudioEngine::play2d("Audio/click.mp3");
                 break;
             case ui::Widget::TouchEventType::ENDED:
                 CCLOG("Exit clicked!");
