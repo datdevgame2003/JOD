@@ -14,8 +14,6 @@ public:
 
 	void takeDamage(Entity* attacker) override;
 	
-	std::string getState(); 
-	
 protected:
 	bool loadAnimations() override;
 
@@ -29,6 +27,7 @@ protected:
 protected:
 	StateMachine* _stateMachine;
 	Character* character;
+	int soundDead;
 };
 
 #endif // !__ENEMY_H__

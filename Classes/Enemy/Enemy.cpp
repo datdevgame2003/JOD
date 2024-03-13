@@ -6,7 +6,8 @@
 #include "StateEnemy/EnemyAttackState.h"
 #include "StateEnemy/EnemyDeadState.h"
 #include "Bullet/Bullet.h"
-#define CHARACTER_TAG 1
+#include "AudioEngine.h"
+
 Enemy* Enemy::create(EntityInfo* info)
 {
 	auto newObject = new Enemy();
@@ -90,6 +91,7 @@ void Enemy::onDie()
 {
 	log("die");
 	// add effects....
+	soundDead = AudioEngine::play2d("Audio/slimeDead.mp3", false, 1.0f);
 	playDeathAnimation();
 	/*this->removeFromParentAndCleanup(true);*/
 }
@@ -114,18 +116,7 @@ bool Enemy::callbackOnContactBegin(PhysicsContact& contact)
 	log("call at enemy");
 	return false;
 }
-//void Enemy::shootBullet(const Vec2& targetPosition)
-//{
-//	//Vec2 bulletDirection = targetPosition - this->getPosition();
-//	//bulletDirection.normalize();
-//	auto bullet = Bullet::create("pumchiu");
-//	bullet->setPosition(this->getPosition());
-//	Vec2 direction = targetPosition - bullet->getPosition();
-//	direction.normalize();
-//	float bulletSpeed = 500.0f;
-//	bullet->getPhysicsBody()->setVelocity(direction * bulletSpeed);
-//	this->getParent()->addChild(bullet, 1);
-//}
+
 
 void Enemy::playDeathAnimation() {
 	auto ani = AnimationCache::getInstance()->getAnimation(_info->_entityName + "-dead");
@@ -143,16 +134,4 @@ void Enemy::playDeathAnimation() {
 	auto sequence = Sequence::create(delay, callback, nullptr);
 	_model->runAction(sequence);
 }
-//void Enemy::update(float dt) {
-//	// Gọi phương thức cơ bản của lớp Entity
-//	Entity::update(dt);
-//
-//	Vec2 characterPosition = character->getPosition();
-//	float distance = this->getPosition().distance(characterPosition);
-//
-//	// Nếu khoảng cách nhỏ hơn một ngưỡng nhất định (ví dụ: 200px)
-//	if (distance < 200.0f) {
-//		// Bắn đạn
-//		this->shootBullet(characterPosition);
-//	}
-//}
+

@@ -57,7 +57,7 @@ bool StartGame::init()
                 break;
             }
         });
-    button->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 300));
+    button->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2 - 200));
     button->setScale(0.3);
     this->addChild(button);
 

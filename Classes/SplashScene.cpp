@@ -1,7 +1,7 @@
 #include "SplashScene.h"
 #include "Menu.h"
 #include "StartGame.h"
-//#include "GameScene.h"
+#include "AudioEngine.h"
 USING_NS_CC;
 
 Scene* SplashScene::createScene()
@@ -21,7 +21,7 @@ bool SplashScene::init() {
 	}
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+	AudioEngine::play2d("Audio/intro.mp3", false, 1.0f);
 	auto background = Sprite::create("HelloWorld.png");
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 1.5));
 	background->setScale(1.5f);

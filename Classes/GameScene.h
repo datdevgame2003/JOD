@@ -38,7 +38,7 @@ protected:
     void updateTime(float dt);
 private:
     bool attackSoundPlayed;
-
+    bool attackAnimationPlayed;
 };
 
 #endif // __GAME_SCENE_H__

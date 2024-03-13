@@ -13,7 +13,7 @@ bool GameWinScene::init() {
 	}
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	soundWin = AudioEngine::play2d("Audio/intro.mp3", false, 1.0f);
+	soundWin = AudioEngine::play2d("Audio/gameWin.mp3", false, 1.0f);
 	auto background = Sprite::create("gamewin.png");
 	background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	background->setScale(2.0f);

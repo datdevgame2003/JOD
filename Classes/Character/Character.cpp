@@ -63,26 +63,7 @@ bool Character::loadAnimations()
 
 	return true;
 }
-//void Character::onEnter()
-//{
-//	Node::onEnter();
-//
-//	// health
-//	_healthCtrl = Health::create(_entityStat->_health, "_hp.png");
-//	_healthCtrl->setOnDie(CC_CALLBACK_0(Character::onDie, this));
-//	_healthCtrl->setPosition(Vec2(-_healthCtrl->getContentSize().width / 2
-//		, _model->getContentSize().height));
-//	//this->addChild(_healthCtrl);
-//}
-//bool Character::callbackOnContactBegin(PhysicsContact& contact)
-//{
-//	auto nodeA = contact.getShapeA()->getBody()->getNode();
-//	auto nodeB = contact.getShapeB()->getBody()->getNode();
-//	if (nodeA != this && nodeB != this) return false;
-//	log("call at character");
-//	return false;
-//
-//}
+
 void Character::onDie()
 {
 	log("character die");

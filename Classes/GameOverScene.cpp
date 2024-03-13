@@ -23,7 +23,7 @@ bool GameOverScene::init() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	int soundLose = AudioEngine::play2d("Audio/gameover.mp3", false, 1.0f);
+	int soundLose = AudioEngine::play2d("Audio/gameLose.mp3", false, 1.0f);
 	AudioEngine::setFinishCallback(soundLose, [=](int audioId, const std::string& filePath)
 		{
 			int soundLose = AudioEngine::play2d("Audio/gameover.mp3", false, 1.0f);

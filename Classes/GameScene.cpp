@@ -47,10 +47,10 @@ bool GameScene::init(std::string mapName)
 		});
 
 	std::map<std::string, int> countdownTimeMap;
-	countdownTimeMap["map1"] = 60;
-	countdownTimeMap["map2"] = 5;
-	countdownTimeMap["map3"] = 90;
-	countdownTimeMap["map4"] = 120;
+	countdownTimeMap["map1"] = 45;
+	countdownTimeMap["map2"] = 65;
+	countdownTimeMap["map3"] = 80;
+	countdownTimeMap["map4"] = 105;
 	if (countdownTimeMap.find(mapName) != countdownTimeMap.end())
 	{
 		initialCountdownTime = countdownTimeMap[mapName];
@@ -89,7 +89,6 @@ bool GameScene::init(std::string mapName)
 			mapLevelModifier = 3;
 		}
 		int enemyLevel = baseEnemyLevel + mapLevelModifier;
-		//auto enemy = Enemy::create(info);
 		Vec2 position;
 		position.x = entityInfo["x"].asFloat();
 		position.y = entityInfo["y"].asFloat();
@@ -313,7 +312,15 @@ bool GameScene::onTouchBegan(Touch* touch, Event* event)
 		bullet->getPhysicsBody()->setVelocity(direction);
 		bullet->setOwner(character);
 		this->addChild(bullet, 1);
-
+		if (!attackAnimationPlayed)
+		{
+			KeyboardInput::getInstance()->onKeyPressed(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
+			this->scheduleOnce([this](float dt) {
+				KeyboardInput::getInstance()->onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, nullptr);
+			attackAnimationPlayed = false;
+				}, 1.0f, "resetAttackAnimation");
+			attackAnimationPlayed = true;
+		}
 		return true;
 	}
 
