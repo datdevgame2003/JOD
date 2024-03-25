@@ -207,7 +207,7 @@ bool GameScene::init(std::string mapName)
 		});
 
 	moveLeft->setPosition(Vec2(visibleSize.width / 2 - 580, visibleSize.height / 2 - 270));
-	moveLeft->setScale(2);
+	moveLeft->setScale(2.5);
 	moveLeft->setOpacity(80);//0-255
 	layer->addChild(moveLeft);
 	auto moveRight = ui::Button::create("d.png");
@@ -229,7 +229,7 @@ bool GameScene::init(std::string mapName)
 		});
 
 	moveRight->setPosition(Vec2(visibleSize.width / 2 - 420, visibleSize.height / 2 - 270));
-	moveRight->setScale(2);
+	moveRight->setScale(2.5);
 	moveRight->setOpacity(80);//0-255
 	layer->addChild(moveRight);
 	auto moveDown = ui::Button::create("s.png");
@@ -251,7 +251,7 @@ bool GameScene::init(std::string mapName)
 		});
 
 	moveDown->setPosition(Vec2(visibleSize.width / 2 - 500, visibleSize.height / 2 - 350));
-	moveDown->setScale(2);
+	moveDown->setScale(2.5);
 	moveDown->setOpacity(80);//0-255
 	layer->addChild(moveDown);
 
